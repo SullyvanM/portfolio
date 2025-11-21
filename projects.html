@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Projets - Sullyvan Modeste</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">SULLYVAN MODESTE</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Retour à l'accueil</a></li>
+        </ul>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <header class="section bg-alt" style="padding-top: 150px; text-align: center;">
+        <h1 class="section-title" style="justify-content: center;">Mes Projets</h1>
+        <p class="description" style="max-width: 800px; margin: 0 auto;">
+            Détails techniques et réalisations académiques.
+        </p>
+    </header>
+
+    <section class="section">
+        <div class="projects-grid">
+            
+            <article class="project-card">
+                <div class="card-image">
+                    <img src="assets/images/project_slime.jpg" alt="Run N Swipe Game" class="project-img">
+                </div>
+                <div class="card-content">
+                    <h3>Run’ N Swipe</h3>
+                    <p class="company">Projet de fin d'année (M2i Promotion 2021)</p>
+                    <p>Runner 3D multijoueur local (16 joueurs) où le smartphone sert de manette.</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p><strong>Run’ N Swipe - "Attention à votre Slime!"</strong></p>
+                        <p>
+                            Jeu de type "runner" 3D développé sous Unity. Le but est de survivre à une course d'obstacles générés procéduralement selon la musique choisie.
+                            La particularité : le jeu tourne sur PC/TV, et jusqu'à 16 joueurs rejoignent la partie avec leur smartphone en scannant un QR Code.
+                        </p>
+                        
+                        <h4>Défis Techniques & Stack :</h4>
+                        <ul>
+                            <li><strong>Moteur & Langage :</strong> Unity 2019, C#.</li>
+                            <li><strong>Réseau (LAN) :</strong> Architecture Client/Serveur utilisant la librairie MLAPI et le protocole LiteNetLib pour gérer 16 connexions simultanées avec faible latence.</li>
+                            <li><strong>Génération Procédurale :</strong> Algorithme d'analyse du spectre audio pour placer les obstacles (trous, murs) en rythme avec la musique.</li>
+                            <li><strong>Cross-Platform :</strong> Communication temps réel entre le serveur Windows et les clients Android via sockets.</li>
+                        </ul>
+
+                        <p><strong>Mon rôle dans l'équipe :</strong> Sound Designer & Modélisateur 3D (Blender/Maya).</p>
+                    </div>
+
+                    <div class="tags">
+                        <span>Unity</span><span>C#</span><span>MLAPI</span><span>Android</span>
+                    </div>
+                </div>
+            </article>
+
+            </div>
+    </section>
+
+    <footer id="contact">
+        <h2>Me Contacter <span class="jp-title">連絡</span></h2>
+        <div class="contact-details">
+            <p><i class="fas fa-envelope"></i> sullyvan.modeste@gmail.com</p>
+            <a href="https://www.linkedin.com/in/modeste-sullyvan/" target="_blank" style="color:#b0b0b0"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        </div>
+        <p class="copyright">© 2025 Sullyvan Modeste</p>
+    </footer>
+
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3 id="modal-title">Titre</h3>
+            <p id="modal-company" class="company">Contexte</p>
+            <div id="modal-body">Description...</div>
+            <div id="modal-tags" class="tags"></div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

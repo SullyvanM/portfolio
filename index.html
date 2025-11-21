@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Sullyvan Modeste</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">SULLYVAN MODESTE</div>
+        <ul class="nav-links">
+            <li><a href="#home">Accueil</a></li>
+            <li><a href="#about">À propos</a></li>
+            <li><a href="#skills">Compétences</a></li>
+            <li><a href="#formation">Formations</a></li>
+            <li><a href="#projects">Expériences</a></li>
+            <li><a href="projects.html" style="color: var(--accent);">Mes Projets</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <header id="home" class="hero">
+        <div class="hero-content">
+            <p class="subtitle">Curriculum Vitae</p>
+            <h1>SULLYVAN <span class="red-circle">MODESTE</span></h1>
+            <p class="description">
+                Expertise en maintenance informatique, réseaux, gestion de projets et développement (Web, Unity, C#).<br>
+                Actuellement en recherche d'un poste sur Toulouse.
+            </p>
+            <div class="hero-btns">
+                <a href="#projects" class="btn-main">Voir mon parcours</a>
+                <a href="#contact" class="btn-secondary">Me contacter</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="section">
+        <h2 class="section-title">À Propos <span class="jp-title">私</span></h2>
+        <div class="about-container">
+            <div class="about-img">
+                <img src="assets/images/sully_japon.jpg" alt="Sullyvan Modeste">
+            </div>
+            <div class="about-text">
+                <h3>Passionné par l'informatique</h3>
+                <p>
+                    Titulaire d'un <strong>Master en Management Ingénierie Informatique - Gaming & SmartTech</strong> et d'un BTS Systèmes Numériques Informatique et Réseaux.<br> 
+                    J'allie des compétences techniques solides (maintenance, réseaux, développement) à une passion forte pour le domaine de l'informatique.
+                </p>
+                <p>
+                    Mes expériences variées, de la Mairie d'Argenteuil à la régie de Disneyland Paris, m'ont appris la rigueur, le travail d'équipe et la gestion du stress en environnement critique.
+                </p>
+                <div class="soft-skills">
+                    <span><i class="fas fa-check"></i> Adaptabilité</span>
+                    <span><i class="fas fa-check"></i> Travail d'équipe</span>
+                    <span><i class="fas fa-check"></i> Empathie</span>
+                    <span><i class="fas fa-check"></i> Communication</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section bg-alt">
+        <h2 class="section-title">Compétences <span class="jp-title">技術</span></h2>
+        
+        <div class="skills-grid">
+            <div class="skill-card">
+                <i class="fas fa-project-diagram"></i>
+                <h3>Gestion de projet</h3>
+                <p>Pilotage & Planification</p>
+                <p>Méthodes Agile (Scrum)</p>
+                <p>Gestion d'équipe (Master)</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-network-wired"></i>
+                <h3>Réseaux & Infra</h3>
+                <p>TCP/IP, VLAN, VPN (Cisco)</p>
+                <p>Admin Windows Server (AD, GPO)</p>
+                <p>Virtualisation</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-tools"></i>
+                <h3>Outils & BDD</h3>
+                <p>SQL Server, MySQL, Oracle</p>
+                <p>Visual Studio, Unity, Unreal Engine / Git</p>
+                <p>Scripting PowerShell (Automatisation)</p>
+            </div>
+        </div>
+
+        <br> <div class="skills-grid">
+            <div class="skill-card">
+                <i class="fas fa-desktop"></i>
+                <h3>Maintenance Informatique</h3>
+                <p>Gestion de parc (+3000 postes)</p>
+                <p>Support N2 & Dépannage Hardware</p>
+                <p>Téléphonie & Ticketing</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-code"></i>
+                <h3>Développement</h3>
+                <p>C# (Unity), Python</p>
+                <p>Web Fullstack (PHP, JS, HTML/CSS)</p>
+                <p>Développement Mobile</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-user-tie"></i>
+                <h3>Relation Client & VIP</h3>
+                <p>Intervention en milieu critique (Disney)</p>
+                <p>Support VIP & Utilisateurs</p>
+                <p>Gestion du stress & Rigueur</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <h2 class="section-title">Expériences professionnelles <span class="jp-title">実績</span></h2>
+        <div class="projects-grid">
+            
+            <article class="project-card">
+                <div class="card-image">
+                    <img src="assets/images/hdv_argenteuil.jpg" alt="Maintenance salle serveur et parc informatique" class="project-img">
+                </div>
+                <div class="card-content">
+                    <h3>Technicien Informatique et Téléphonie</h3>
+                    <p class="company">Mairie d'Argenteuil (2021 - Présent)</p>
+                    <p>Gestion d'un parc de +3000 postes. Création de scripts pour l'automatisation, gestion réseau et téléphonie.</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p><strong>Technicien de maintenance informatique et téléphonie</strong></p>
+                        <ul>
+                            <li>Gestion du parc informatique et téléphonie (+3000 postes).</li>
+                            <li>Gestion du réseau (TCP/IP, VLAN, VPN).</li>
+                            <li>Création de scripts pour l'automatisation.</li>
+                            <li>Dépannage informatique sur logiciels et hardware.</li>
+                        </ul>
+                    </div>
+
+                    <div class="tags">
+                        <span>Scripting</span><span>Support N2</span><span>Réseau</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="card-image">
+                     <img src="assets/images/disneyland_paris.jpg" alt="Régie de spectacle à Disneyland Paris" class="project-img">
+                </div>
+                <div class="card-content">
+                    <h3>Show Control & Supervision</h3>
+                    <p class="company">Disneyland Paris (2022 - 2023)</p>
+                    <p>Programmation sur Medialon, supervision et monitoring temps réel des lumières et du son pour les spectacles.</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p><strong>Opérateur programmeur régie / Show Control</strong></p>
+                        <ul>
+                            <li>Supervision et monitoring temps réel des lumières et du son pour les parades.</li>
+                            <li>Programmation sur Medialon.</li>
+                            <li>Régisseur et gestion audiovisuelle des parades sur le parc.</li>
+                            <li>Travail en environnement critique.</li>
+                        </ul>
+                    </div>
+
+                    <div class="tags">
+                        <span>Medialon</span><span>Audiovisuel</span><span>Régie</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="card-image">
+                     <img src="assets/images/dev_web.jpg" alt="Développement web Fullstack" class="project-img">
+                </div>
+                <div class="card-content">
+                    <h3>Développeur Web Fullstack</h3>
+                    <p class="company">Aleaur (2018 - 2021)</p>
+                    <p>Alternance de 3 ans. Développement web et gestion/administration de bases de données.</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p><strong>Développeur web en alternance</strong></p>
+                        <ul>
+                            <li>Développement web Fullstack (PHP, HTML5, CSS, JS).</li>
+                            <li>Gestion et administration de bases de données (MySQL).</li>
+                            <li>Maintenance évolutive des solutions web.</li>
+                        </ul>
+                    </div>
+
+                    <div class="tags">
+                        <span>PHP</span><span>MySQL</span><span>Web</span>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <section id="formation" class="section">
+        <h2 class="section-title">Formation <span class="jp-title">学歴</span></h2>
+        <div class="formation-grid">
+            
+            <article class="formation-card">
+                <div class="card-image">
+                    <div class="placeholder-img color-1">
+                        <i class="fas fa-user-graduate fa-3x"></i>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3>Master Ingénierie Informatique</h3>
+                    <p class="company">ESIEE-IT (2018 - 2021)</p>
+                    <p>Spécialisation SmartTech.</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p><strong>Master en Management Ingénierie Informatique - Option Gaming & SmartTech</strong></p>
+                        <ul>
+                            <li>Gestion de projet Agile.</li>
+                            <li>Développement Unity, Unreal Engine et Back/Front.</li>
+                            <li>Management d'équipe de 3 à 6 personnes.</li>
+                        </ul>
+                    </div>
+
+                    <div class="tags">
+                        <span>Management</span>
+                        <span>SmartTech</span>
+                        <span>Projet</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="formation-card">
+                <div class="card-image">
+                    <div class="placeholder-img color-2">
+                        <i class="fas fa-microchip fa-3x"></i>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3>BTS SNIR</h3>
+                    <p class="company">Lycée J. Jaurès (2016 - 2018)</p>
+                    <p>Systèmes Numériques Informatique et Réseaux.</p>
+
+                    <div class="hidden-details" style="display:none;">
+                        <p><strong>BTS Systèmes Numériques option Informatique et Réseaux</strong></p>
+                        <ul>
+                            <li>Administration réseau.</li>
+                            <li>Programmation système (C++, C#, Python).</li>
+                            <li>Projets techniques en équipe.</li>
+                        </ul>
+                    </div>
+
+                    <div class="tags">
+                        <span>Réseau</span>
+                        <span>Électronique</span>
+                        <span>Informatique</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="formation-card"> 
+                <div class="card-image">
+                    <div class="placeholder-img color-3">
+                        <i class="fas fa-laptop fa-3x"></i>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3>BAC STI2D</h3>
+                    <p class="company">Lycée J. Jaurès (2015 - 2016)</p>
+                    <p>Système d'Information et Numérique.</p>
+
+                    <div class="hidden-details" style="display:none;">
+                        <p><strong>BAC Sciences et Technologies de l'Industrie et du Développement Durable</strong></p>
+                        <ul>
+                            <li>Spécialité SIN (Système d'Information et Numérique).</li>
+                            <li>Première approche du développement et de l'architecture réseau.</li>
+                        </ul>
+                    </div>
+
+                    <div class="tags">
+                        <span>Logique</span>
+                        <span>Programmation</span>
+                        <span>Réseau</span>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <footer id="contact">
+        <h2>Me Contacter <span class="jp-title">連絡</span></h2>
+        <div class="contact-details">
+            <p><i class="fas fa-map-marker-alt"></i> 31320, Castanet-Tolosan</p>
+            <p><i class="fas fa-envelope"></i> sullyvan.modeste@gmail.com</p>
+            <p><i class="fas fa-phone"></i> 06.25.54.25.15</p>
+        </div>
+        <div class="socials">
+            <a href="https://www.linkedin.com/in/modeste-sullyvan/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        </div>
+        <p class="copyright">© 2025 Sullyvan Modeste | Portfolio IT</p>
+    </footer>
+
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3 id="modal-title">Titre</h3>
+            <p id="modal-company" class="company">Entreprise/Ecole</p>
+            <div id="modal-body">Description détaillée...</div>
+            <div id="modal-tags" class="tags"></div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
