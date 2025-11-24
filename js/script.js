@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('modal-body').innerHTML = hobbiesDetails.innerHTML;
             
             // Tags spécifiques pour les hobbies
-            document.getElementById('modal-tags').innerHTML = "<span>Photographie</span><span>Jeux Vidéo</span><span>Kendo</span><span>Discipline</span>";
+            document.getElementById('modal-tags').innerHTML = "<span>Photographie</span><span>Jeux Vidéo</span><span>Kendo</span>";
 
             // Afficher la modale
             modal.style.display = 'flex';
