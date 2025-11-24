@@ -69,4 +69,30 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.style.display = 'none';
         }
     });
+<<<<<<< Updated upstream
+=======
+
+    // =========================================================
+    // 04. NOUVEAU : GESTION DE LA MODALE HOBBIES
+    // =========================================================
+    
+    const btnShowHobbies = document.getElementById('btn-show-hobbies');
+    const hobbiesDetails = document.getElementById('hobbies-details');
+
+    if (btnShowHobbies && hobbiesDetails) {
+        btnShowHobbies.addEventListener('click', () => {
+            
+            // Remplir la modale avec le contenu de #hobbies-details
+            document.getElementById('modal-title').innerText = "Mes Hobbies et Compétences Douces (Soft Skills)";
+            document.getElementById('modal-company').innerText = "Découvrez ma personnalité et les qualités que ces activités développent.";
+            document.getElementById('modal-body').innerHTML = hobbiesDetails.innerHTML;
+            
+            // Tags spécifiques pour les hobbies
+            document.getElementById('modal-tags').innerHTML = "<span>Photographie</span><span>Jeux Vidéo</span><span>Kendo</span>";
+
+            // Afficher la modale
+            modal.style.display = 'flex';
+        });
+    }
+>>>>>>> Stashed changes
 });
