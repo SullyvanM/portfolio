@@ -6,6 +6,7 @@
     --text-muted: #b0b0b0;
     --accent: #ff2e63; /* Rouge Japonais Moderne */
     --font-jp: 'Noto Sans JP', sans-serif;
+    --border-radius: 8px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -63,7 +64,7 @@ ul { list-style: none; }
 
 .btn-main {
     padding: 12px 30px; border: 2px solid var(--accent); background: var(--accent);
-    color: white; border-radius: 4px; font-weight: bold;
+    color: white; border-radius: 4px; font-weight: bold; cursor: pointer;
 }
 .btn-secondary {
     padding: 12px 30px; border: 2px solid var(--text-main);
@@ -98,41 +99,41 @@ ul { list-style: none; }
 
 /* Cartes Compétences */
 .skill-card {
-    background: var(--bg-card); padding: 30px; border-radius: 8px; text-align: center;
+    background: var(--bg-card); padding: 30px; border-radius: var(--border-radius); text-align: center;
     border: 1px solid #333; transition: transform 0.3s;
 }
 .skill-card:hover { transform: translateY(-5px); border-color: var(--accent); }
 .skill-card i { font-size: 3rem; color: var(--accent); margin-bottom: 20px; }
 
-/* Cartes Expériences (Projets) */
-.project-card {
-    background: var(--bg-card); border-radius: 8px; overflow: hidden;
+/* Cartes Expériences & Formations */
+.project-card, .formation-card {
+    background: var(--bg-card); border-radius: var(--border-radius); overflow: hidden;
     border: 1px solid #333; transition: 0.3s; display: flex; flex-direction: column;
-    cursor: pointer; /* Indique que c'est cliquable */
+    cursor: pointer;
 }
-.project-card:hover { transform: scale(1.02); border-color: #555; }
+.project-card:hover, .formation-card:hover { transform: scale(1.02); border-color: #555; }
 
-/* Cartes Formations */
-.formation-card {
-    background: var(--bg-card); border-radius: 8px; overflow: hidden;
-    border: 1px solid #333; transition: 0.3s; display: flex; flex-direction: column;
-    cursor: pointer; /* Indique que c'est cliquable */
-}
-.formation-card:hover { transform: scale(1.02); border-color: #555; }
+/* Images dans les cartes */
 .card-image {
-    height: 200px; /* Ajustez la hauteur selon vos préférences */
+    height: 200px;
     width: 100%;
     overflow: hidden;
-    border-top-left-radius: var(--border-radius); /* Si vous utilisez des variables */
+    border-top-left-radius: var(--border-radius);
     border-top-right-radius: var(--border-radius);
-    /* Si vous n'utilisez pas de variables, mettez la valeur en px, ex: 10px */
 }
+.project-img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.3s ease;
+}
+.project-card:hover .project-img { transform: scale(1.05); }
+
+/* Placeholder (pour formations) */
 .placeholder-img {
     width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white;
 }
-.color-1 { background: #2c3e50; } /* Bleu nuit */
-.color-2 { background: #4a148c; } /* Violet Disney */
-.color-3 { background: #1e3799; } /* Bleu Web */
+.color-1 { background: #2c3e50; }
+.color-2 { background: #4a148c; }
+.color-3 { background: #1e3799; }
 
 .card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
 .card-content h3 { margin-bottom: 5px; }
@@ -143,12 +144,88 @@ ul { list-style: none; }
     border-radius: 4px; margin-right: 5px; color: var(--text-muted);
 }
 
-/* --- FOOTER --- */
-footer { text-align: center; padding: 60px 20px; background: #0f0f0f; border-top: 1px solid #333; }
-.contact-details p { margin: 10px 0; font-size: 1.1rem; }
-.socials { margin: 30px 0; font-size: 2rem; }
-.socials a { color: var(--text-muted); transition: 0.3s; }
-.socials a:hover { color: var(--accent); }
+/* --- SECTION CONTACT & FORMULAIRE (MODIFIÉ) --- */
+.contact-container {
+    display: flex; /* Utilisation de Flexbox au lieu de Grid */
+    justify-content: space-between;
+    align-items: flex-start; /* Aligne le texte en HAUT */
+    gap: 4rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Infos (Gauche) */
+.contact-info-column {
+    flex: 1; /* Prend l'espace disponible */
+    padding-top: 10px; /* Alignement visuel */
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-details p {
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+}
+.contact-details i {
+    color: var(--accent);
+    margin-right: 15px;
+    width: 25px;
+    text-align: center;
+}
+
+/* LinkedIn */
+.socials {
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+}
+.socials a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.socials a:hover {
+    color: var(--accent);
+}
+
+/* Formulaire (Droite - MODIFIÉ) */
+.contact-form {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    
+    width: 100%;
+    max-width: 400px; /* Réduit la largeur maximale du formulaire */
+}
+
+.form-group { margin-bottom: 0.8rem; }
+.form-group label {
+    display: block; margin-bottom: 0.3rem;
+    font-weight: 500; color: #333;
+}
+.contact-form input, .contact-form textarea {
+    width: 100%; 
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px; font-family: inherit; font-size: 1rem;
+}
+.contact-form input:focus, .contact-form textarea:focus {
+    outline: none; border-color: var(--accent);
+}
+.full-width { 
+    width: 100%; 
+    margin-top: 10px; 
+    padding: 10px;
+}
+
+/* --- FOOTER FINAL --- */
+.main-footer {
+    text-align: center; padding: 30px 20px;
+    background: #0f0f0f; border-top: 1px solid #333;
+}
 .copyright { font-size: 0.8rem; color: #555; }
 
 /* --- MOBILE --- */
@@ -159,76 +236,47 @@ footer { text-align: center; padding: 60px 20px; background: #0f0f0f; border-top
     .about-container { flex-direction: column; text-align: center; }
     .soft-skills { justify-content: center; }
     .section { padding: 50px 20px; }
+    
+    /* Contact Mobile - MODIFIÉ */
+    .contact-container {
+        flex-direction: column; /* Empile les éléments */
+        gap: 2rem;
+    }
+    
+    .contact-info-column { 
+        width: 100%;
+        text-align: center; 
+    }
+    
+    .contact-details p { 
+        justify-content: center; 
+    }
+    
+    .contact-form {
+        max-width: 100%; /* Reprend toute la largeur sur mobile */
+    }
 }
 
 /* --- MODAL / POPUP --- */
 .modal {
-    display: none; /* Caché par défaut */
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Fond noir transparent */
-    backdrop-filter: blur(5px); /* Effet de flou */
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+    display: none; position: fixed; z-index: 2000; left: 0; top: 0;
+    width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px); justify-content: center; align-items: center; padding: 20px;
 }
-
 .modal-content {
-    background-color: var(--bg-card);
-    border: 1px solid var(--accent);
-    padding: 40px;
-    border-radius: 8px;
-    width: 100%;
-    max-width: 600px;
-    position: relative;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    background-color: var(--bg-card); border: 1px solid var(--accent);
+    padding: 40px; border-radius: 8px; width: 100%; max-width: 600px;
+    position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     animation: slideIn 0.3s ease-out;
 }
-
 @keyframes slideIn {
     from { transform: translateY(50px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
 }
-
 .close-btn {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    color: var(--text-muted);
-    font-size: 30px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
+    position: absolute; top: 15px; right: 20px; color: var(--text-muted);
+    font-size: 30px; font-weight: bold; cursor: pointer; transition: 0.3s;
 }
-
-.close-btn:hover {
-    color: var(--accent);
-}
-
-/* Style spécifique pour le contenu de la modale */
-#modal-body ul {
-    list-style: disc outside;
-    margin-left: 20px;
-    margin-top: 10px;
-    color: var(--text-muted);
-}
-#modal-body p {
-    margin-bottom: 10px;
-}
-
-/* --- GESTION DES IMAGES PROJETS --- */
-.project-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Très important : ça coupe l'image pour remplir la zone sans la déformer */
-    transition: transform 0.3s ease; /* Petit effet sympa au survol */
-}
-
-/* Petit effet de zoom sur l'image au survol */
-.project-card:hover .project-img {
-    transform: scale(1.05);
-}
+.close-btn:hover { color: var(--accent); }
+#modal-body ul { list-style: disc outside; margin-left: 20px; margin-top: 10px; color: var(--text-muted); }
+#modal-body p { margin-bottom: 10px; }
