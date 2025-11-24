@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Remplir la modale avec le contenu de #hobbies-details
             document.getElementById('modal-title').innerText = "Mes Hobbies";
-            document.getElementById('modal-company').innerText = "Découvrez ma personnalité et les qualités que ces activités développent.";
+            //document.getElementById('modal-company').innerText = "";
             document.getElementById('modal-body').innerHTML = hobbiesDetails.innerHTML;
             
             // Tags spécifiques pour les hobbies
