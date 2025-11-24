@@ -123,12 +123,11 @@ document.addEventListener('DOMContentLoaded', () => {
         btnShowHobbies.addEventListener('click', () => {
             
             // Remplir la modale avec le contenu de #hobbies-details
-            document.getElementById('modal-title').innerText = "Mes Hobbies et Compétences Douces (Soft Skills)";
-            document.getElementById('modal-company').innerText = "Découvrez ma personnalité et les qualités que ces activités développent.";
+            document.getElementById('modal-title').innerText = "Mes Hobbies";
             document.getElementById('modal-body').innerHTML = hobbiesDetails.innerHTML;
             
             // Tags spécifiques pour les hobbies
-            document.getElementById('modal-tags').innerHTML = "<span>Photographie</span><span>Jeux Vidéo</span><span>Kendo</span><span>Discipline</span>";
+            document.getElementById('modal-tags').innerHTML = "<span>Photographie</span><span>Jeux Vidéo</span><span>Kendo</span>";
 
             // Afficher la modale
             modal.style.display = 'flex';
