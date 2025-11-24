@@ -1,17 +1,29 @@
-/* Typo et Couleurs --- */
+/* ========================================================= */
+/* 01. TYPOGRAPHIE ET VARIABLES CSS                          */
+/* ========================================================= */
 :root {
+    /* Couleurs */
     --bg-dark: #121212;
     --bg-card: #1e1e1e;
     --text-main: #f0f0f0;
     --text-muted: #b0b0b0;
-    --accent: #ff2e63;
+    --accent: #ff2e63; /* Couleur principale */
+    /* Typographie et Taille */
     --font-jp: 'Noto Sans JP', sans-serif;
     --border-radius: 8px;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+/* Réinitialisation de base */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+html { 
+    scroll-behavior: smooth; 
+}
 
+/* Style du corps de page */
 body {
     font-family: var(--font-jp);
     background-color: var(--bg-dark);
@@ -19,8 +31,19 @@ body {
     line-height: 1.6;
 }
 
-a { text-decoration: none; color: inherit; transition: 0.3s; }
-ul { list-style: none; }
+/* Styles des liens et listes */
+a { 
+    text-decoration: none; 
+    color: inherit; 
+    transition: 0.3s; 
+}
+ul { 
+    list-style: none; 
+}
+
+/* ========================================================= */
+/* 02. NAVIGATION (NAVBAR) ET EN-TÊTE (HERO)                 */
+/* ========================================================= */
 
 /* Navbar */
 .navbar {
@@ -36,13 +59,33 @@ ul { list-style: none; }
     z-index: 1000;
     border-bottom: 1px solid #333;
 }
-.logo { font-weight: 700; font-size: 1.2rem; letter-spacing: 1px; }
-.logo .kanji { color: var(--accent); margin-left: 5px; }
-.nav-links { display: flex; gap: 30px; }
-.nav-links a:hover { color: var(--accent); }
-.hamburger { display: none; cursor: pointer; font-size: 1.5rem; }
 
-/* Hero Section - Première partie */
+.logo { 
+    font-weight: 700; 
+    font-size: 1.2rem; 
+    letter-spacing: 1px; 
+}
+.logo .kanji { 
+    color: var(--accent); 
+    margin-left: 5px; 
+}
+
+.nav-links { 
+    display: flex; 
+    gap: 30px; 
+}
+.nav-links a:hover { 
+    color: var(--accent); 
+}
+
+/* Le hamburger est masqué par défaut en desktop */
+.hamburger { 
+    display: none; 
+    cursor: pointer; 
+    font-size: 1.5rem; 
+}
+
+/* Hero Section */
 .hero {
     height: 100vh;
     display: flex;
@@ -52,68 +95,192 @@ ul { list-style: none; }
     background: radial-gradient(circle at center, #2a2a2a 0%, #121212 70%);
     padding: 0 20px;
 }
-.hero h1 { font-size: 3.5rem; margin: 10px 0; font-weight: 700; }
-.red-circle { color: var(--accent); position: relative; display: inline-block; }
+.hero h1 { 
+    font-size: 3.5rem; 
+    margin: 10px 0; 
+    font-weight: 700; 
+}
+
+/* Effet de surlignage */
+.red-circle { 
+    color: var(--accent); 
+    position: relative; 
+    display: inline-block; 
+}
 .red-circle::after {
-    content: ''; position: absolute; bottom: 5px; left: 0; width: 100%; height: 10px;
-    background: var(--accent); opacity: 0.3; z-index: -1;
+    content: ''; 
+    position: absolute; 
+    bottom: 5px; 
+    left: 0; 
+    width: 100%; 
+    height: 10px;
+    background: var(--accent); 
+    opacity: 0.3; 
+    z-index: -1;
 }
-.hero .subtitle { letter-spacing: 3px; text-transform: uppercase; color: var(--accent); font-weight: bold; }
-.hero .description { max-width: 600px; margin: 0 auto 30px; color: var(--text-muted); }
-.hero-btns { display: flex; gap: 20px; justify-content: center; }
 
+.hero .subtitle { 
+    letter-spacing: 3px; 
+    text-transform: uppercase; 
+    color: var(--accent); 
+    font-weight: bold; 
+}
+.hero .description { 
+    max-width: 600px; 
+    margin: 0 auto 30px; 
+    color: var(--text-muted); 
+}
+.hero-btns { 
+    display: flex; 
+    gap: 20px; 
+    justify-content: center; 
+}
+
+/* Boutons */
 .btn-main {
-    padding: 12px 30px; border: 2px solid var(--accent); background: var(--accent);
-    color: white; border-radius: 4px; font-weight: bold; cursor: pointer;
+    padding: 12px 30px; 
+    border: 2px solid var(--accent); 
+    background: var(--accent);
+    color: white; 
+    border-radius: 4px; 
+    font-weight: bold; 
+    cursor: pointer;
 }
+
 .btn-secondary {
-    padding: 12px 30px; border: 2px solid var(--text-main);
-    color: var(--text-main); border-radius: 4px; font-weight: bold;
+    padding: 12px 30px;
+    /* Contour ROUGE */
+    border: 2px solid var(--accent);
+    /* Texte ROUGE */
+    color: var(--accent);
+    /* Coins arrondis (comme l'autre bouton) */
+    border-radius: 4px;
+    font-weight: bold;
+    
+    /* --- Correctifs essentiels pour les balises <button> --- */
+    background-color: transparent; /* Fond transparent par défaut */
+    cursor: pointer; /* Curseur main */
+    font-family: inherit; /* Utilise la police du site */
+    font-size: 1rem; /* Taille de texte correcte */
+    transition: 0.3s all ease; /* Animation fluide */
 }
-.btn-main:hover { background: transparent; color: var(--accent); }
-.btn-secondary:hover { background: var(--text-main); color: var(--bg-dark); }
 
-/* Les sections */
-.section { padding: 80px 50px; max-width: 1200px; margin: 0 auto; }
-.bg-alt { background-color: #181818; width: 100%; max-width: 100%; }
+.btn-main:hover { 
+    background: transparent; 
+    color: var(--accent); 
+}
+
+.btn-secondary:hover {
+    /* Au survol : Remplissage ROUGE */
+    background: var(--accent);
+    /* Texte BLANC pour le contraste */
+    color: white;
+}
+
+/* ========================================================= */
+/* 03. STRUCTURE DES SECTIONS ET DES GRILLES                 */
+/* ========================================================= */
+
+.section { 
+    padding: 80px 50px; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+}
+.bg-alt { 
+    background-color: #181818; 
+    width: 100%; 
+    max-width: 100%; 
+}
+
+/* Titre des sections */
 .section-title {
-    font-size: 2rem; margin-bottom: 50px; border-left: 5px solid var(--accent);
-    padding-left: 15px; display: flex; align-items: baseline;
+    font-size: 2rem; 
+    margin-bottom: 50px; 
+    border-left: 5px solid var(--accent);
+    padding-left: 15px; 
+    display: flex; 
+    align-items: baseline;
 }
-.jp-title { font-size: 1.5rem; margin-left: 10px; color: #444; font-weight: 300; }
+.jp-title { 
+    font-size: 1.5rem; 
+    margin-left: 10px; 
+    color: #444; 
+    font-weight: 300; 
+}
 
-/* A propos */
-.about-container { display: flex; gap: 50px; align-items: center; flex-wrap: wrap; }
+/* A Propos */
+.about-container { 
+    display: flex; 
+    gap: 50px; 
+    align-items: center; 
+    flex-wrap: wrap; 
+}
 .about-img img {
-    width: 300px; height: 300px; object-fit: cover; border-radius: 10px;
-    border: 3px solid var(--accent); box-shadow: 10px 10px 0px #333;
+    width: 300px; 
+    height: 300px; 
+    object-fit: cover; 
+    border-radius: 10px;
+    border: 3px solid var(--accent); 
+    box-shadow: 10px 10px 0px #333;
 }
-.about-text { flex: 1; }
-.about-text h3 { margin-bottom: 20px; font-size: 1.5rem; }
-.soft-skills { margin-top: 20px; display: flex; gap: 20px; color: var(--accent); font-weight: bold; }
+.about-text { 
+    flex: 1; 
+}
+.about-text h3 { 
+    margin-bottom: 20px; 
+    font-size: 1.5rem; 
+}
+.soft-skills { 
+    margin-top: 20px; 
+    display: flex; 
+    gap: 20px; 
+    color: var(--accent); 
+    font-weight: bold; 
+}
 
-/* Les grilles*/
+/* Grilles pour Compétences, Projets, Formations */
 .skills-grid, .projects-grid, .formation-grid{
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 30px;
 }
 
 /* Cartes Compétences */
 .skill-card {
-    background: var(--bg-card); padding: 30px; border-radius: var(--border-radius); text-align: center;
-    border: 1px solid #333; transition: transform 0.3s;
+    background: var(--bg-card); 
+    padding: 30px; 
+    border-radius: var(--border-radius); 
+    text-align: center;
+    border: 1px solid #333; 
+    transition: transform 0.3s;
 }
-.skill-card:hover { transform: translateY(-5px); border-color: var(--accent); }
-.skill-card i { font-size: 3rem; color: var(--accent); margin-bottom: 20px; }
+.skill-card:hover { 
+    transform: translateY(-5px); 
+    border-color: var(--accent); 
+}
+.skill-card i { 
+    font-size: 3rem; 
+    color: var(--accent); 
+    margin-bottom: 20px; 
+}
 
 /* Cartes Expériences & Formations */
 .project-card, .formation-card {
-    background: var(--bg-card); border-radius: var(--border-radius); overflow: hidden;
-    border: 1px solid #333; transition: 0.3s; display: flex; flex-direction: column;
+    background: var(--bg-card); 
+    border-radius: var(--border-radius); 
+    overflow: hidden;
+    border: 1px solid #333; 
+    transition: 0.3s; 
+    display: flex; 
+    flex-direction: column;
     cursor: pointer;
 }
-.project-card:hover, .formation-card:hover { transform: scale(1.02); border-color: #555; }
+.project-card:hover, .formation-card:hover { 
+    transform: scale(1.02); 
+    border-color: #555; 
+}
 
-/* Images dans les cartes */
+/* Images et Contenu des cartes */
 .card-image {
     height: 200px;
     width: 100%;
@@ -122,33 +289,64 @@ ul { list-style: none; }
     border-top-right-radius: var(--border-radius);
 }
 .project-img {
-    width: 100%; height: 100%; object-fit: cover;
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover;
     transition: transform 0.3s ease;
 }
-.project-card:hover .project-img { transform: scale(1.05); }
+.project-card:hover .project-img { 
+    transform: scale(1.05); 
+}
 
 /* Placeholder (pour formations) */
 .placeholder-img {
-    width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white;
+    width: 100%; 
+    height: 100%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    color: white;
 }
 .color-1 { background: #2c3e50; }
 .color-2 { background: #4a148c; }
 .color-3 { background: #1e3799; }
 
-.card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
-.card-content h3 { margin-bottom: 5px; }
-.company { color: var(--accent); font-style: italic; font-size: 0.9rem; margin-bottom: 15px; }
-.tags { margin-top: auto; padding-top: 15px; }
+.card-content { 
+    padding: 20px; 
+    flex-grow: 1; 
+    display: flex; 
+    flex-direction: column; 
+}
+.card-content h3 { 
+    margin-bottom: 5px; 
+}
+.company { 
+    color: var(--accent); 
+    font-style: italic; 
+    font-size: 0.9rem; 
+    margin-bottom: 15px; 
+}
+.tags { 
+    margin-top: auto; 
+    padding-top: 15px; 
+}
 .tags span {
-    font-size: 0.8rem; background: #333; padding: 4px 8px;
-    border-radius: 4px; margin-right: 5px; color: var(--text-muted);
+    font-size: 0.8rem; 
+    background: #333; 
+    padding: 4px 8px;
+    border-radius: 4px; 
+    margin-right: 5px; 
+    color: var(--text-muted);
 }
 
-/* Contact et form */
+/* ========================================================= */
+/* 04. CONTACT ET FORMULAIRE                                 */
+/* ========================================================= */
+
 .contact-container {
-    display: flex; /* Utilisation de Flexbox au lieu de Grid */
+    display: flex;
     justify-content: space-between;
-    align-items: flex-start; /* Aligne le texte en HAUT */
+    align-items: flex-start;
     gap: 4rem;
     max-width: 1000px;
     margin: 0 auto;
@@ -157,8 +355,8 @@ ul { list-style: none; }
 
 /* Infos à gauche */
 .contact-info-column {
-    flex: 1; /* Prend l'espace disponible */
-    padding-top: 10px; /* Alignement visuel */
+    flex: 1;
+    padding-top: 10px;
     display: flex;
     flex-direction: column;
 }
@@ -176,7 +374,7 @@ ul { list-style: none; }
     text-align: center;
 }
 
-/* LinkedIn */
+/* Sociaux (LinkedIn, etc.) */
 .socials {
     margin-top: 1.5rem;
     font-size: 1.5rem;
@@ -196,24 +394,30 @@ ul { list-style: none; }
     padding: 1.5rem;
     border-radius: var(--border-radius);
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    
     width: 100%;
     max-width: 400px; 
 }
 
-.form-group { margin-bottom: 0.8rem; }
+.form-group { 
+    margin-bottom: 0.8rem; 
+}
 .form-group label {
-    display: block; margin-bottom: 0.3rem;
-    font-weight: 500; color: #333;
+    display: block; 
+    margin-bottom: 0.3rem;
+    font-weight: 500; 
+    color: #333;
 }
 .contact-form input, .contact-form textarea {
     width: 100%; 
     padding: 8px;
     border: 1px solid #ccc;
-    border-radius: 4px; font-family: inherit; font-size: 1rem;
+    border-radius: 4px; 
+    font-family: inherit; 
+    font-size: 1rem;
 }
 .contact-form input:focus, .contact-form textarea:focus {
-    outline: none; border-color: var(--accent);
+    outline: none; 
+    border-color: var(--accent);
 }
 .full-width { 
     width: 100%; 
@@ -223,23 +427,74 @@ ul { list-style: none; }
 
 /* Footer */
 .main-footer {
-    text-align: center; padding: 30px 20px;
-    background: #0f0f0f; border-top: 1px solid #333;
+    text-align: center; 
+    padding: 30px 20px;
+    background: #0f0f0f; 
+    border-top: 1px solid #333;
 }
-.copyright { font-size: 0.8rem; color: #555; }
+.copyright { 
+    font-size: 0.8rem; 
+    color: #555; 
+}
+
+/* ========================================================= */
+/* 05. RESPONSIVE DESIGN (MOBILE) ET MODALE                  */
+/* ========================================================= */
 
 /* Version mobile */
 @media (max-width: 768px) {
-    .navbar { padding: 15px 20px; }
-    .nav-links { display: none; } 
-    .hero h1 { font-size: 2.5rem; }
-    .about-container { flex-direction: column; text-align: center; }
-    .soft-skills { justify-content: center; }
-    .section { padding: 50px 20px; }
+    .navbar { 
+        padding: 15px 20px; 
+    }
     
-    /* Contact Mobile - MODIFIÉ */
+    /* ------------------------------------- */
+    /* GESTION DU MENU HAMBURGER */
+    /* ------------------------------------- */
+    .nav-links { 
+        display: none; /* Masque les liens par défaut */
+    } 
+    
+    .hamburger {
+        display: block; /* Affiche le hamburger sur mobile */
+    }
+    
+    /* Le JS ajoute la classe .active pour forcer l'affichage du menu */
+    .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 61px;
+        left: 0;
+        width: 100%;
+        background: var(--bg-dark);
+        padding: 20px;
+        border-top: 1px solid #333;
+        z-index: 999;
+    }
+
+    .nav-links.active li {
+        text-align: center;
+        margin: 10px 0;
+    }
+    /* ------------------------------------- */
+
+    .hero h1 { 
+        font-size: 2.5rem; 
+    }
+    .about-container { 
+        flex-direction: column; 
+        text-align: center; 
+    }
+    .soft-skills { 
+        justify-content: center; 
+    }
+    .section { 
+        padding: 50px 20px; 
+    }
+    
+    /* Contact Mobile */
     .contact-container {
-        flex-direction: column; /* Empile les éléments */
+        flex-direction: column; 
         gap: 2rem;
     }
     
@@ -257,26 +512,111 @@ ul { list-style: none; }
     }
 }
 
-/* Popup*/
+/* Popup/Modale */
 .modal {
-    display: none; position: fixed; z-index: 2000; left: 0; top: 0;
-    width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px); justify-content: center; align-items: center; padding: 20px;
+    display: none; 
+    position: fixed; 
+    z-index: 2000; 
+    left: 0; 
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px); 
+    justify-content: center; 
+    align-items: center; 
+    padding: 20px;
 }
 .modal-content {
-    background-color: var(--bg-card); border: 1px solid var(--accent);
-    padding: 40px; border-radius: 8px; width: 100%; max-width: 600px;
-    position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    background-color: var(--bg-card); 
+    border: 1px solid var(--accent);
+    padding: 40px; 
+    border-radius: 8px; 
+    width: 100%; 
+    max-width: 600px;
+    position: relative; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     animation: slideIn 0.3s ease-out;
 }
 @keyframes slideIn {
-    from { transform: translateY(50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    from { 
+        transform: translateY(50px); 
+        opacity: 0; 
+    }
+    to { 
+        transform: translateY(0); 
+        opacity: 1; 
+    }
 }
 .close-btn {
-    position: absolute; top: 15px; right: 20px; color: var(--text-muted);
-    font-size: 30px; font-weight: bold; cursor: pointer; transition: 0.3s;
+    position: absolute; 
+    top: 15px; 
+    right: 20px; 
+    color: var(--text-muted);
+    font-size: 30px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: 0.3s;
 }
-.close-btn:hover { color: var(--accent); }
-#modal-body ul { list-style: disc outside; margin-left: 20px; margin-top: 10px; color: var(--text-muted); }
-#modal-body p { margin-bottom: 10px; }
+.close-btn:hover { 
+    color: var(--accent); 
+}
+#modal-body ul { 
+    list-style: disc outside; 
+    margin-left: 20px; 
+    margin-top: 10px; 
+    color: var(--text-muted); 
+}
+#modal-body p { 
+    margin-bottom: 10px; 
+}
+
+/* ========================================================= */
+/* 06. STYLES SPÉCIFIQUES POUR LE CONTENU DE LA MODALE HOBBIES */
+/* ========================================================= */
+
+.hobbies-list {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 15px; 
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed #333; 
+}
+
+.hobby-item {
+    flex-basis: calc(50% - 7.5px); 
+    background: var(--bg-dark); 
+    padding: 15px;
+    border-radius: var(--border-radius);
+    border-left: 3px solid var(--accent); 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.hobby-item h4 {
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.hobby-item p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: 5px;
+    line-height: 1.4;
+}
+
+.hobby-item i {
+    font-size: 1.2rem;
+    margin-right: 8px;
+    color: var(--accent); 
+}
+
+/* Ajustement pour les très petits écrans à l'intérieur de la modale */
+@media (max-width: 550px) {
+    .hobby-item {
+        flex-basis: 100%; 
+    }
+}
