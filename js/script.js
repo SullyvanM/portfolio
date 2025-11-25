@@ -1,15 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // =========================================================
     // 01. SÉLECTEURS GLOBAUX
     // =========================================================
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     const navIcon = hamburger.querySelector('i');
-    
-    // Sélecteurs de la modale
-    const modal = document.getElementById('project-modal');
-    const closeBtn = document.querySelector('.close-btn');
+
+    // Sélecteurs de la modale (NOTE : ON N'UTILISE QUE PROJECT-MODAL)
+    const modal = document.getElementById('project-modal'); 
+    const closeBtn = modal.querySelector('.close-btn');
+    const modalTitle = document.getElementById('modal-title');
+    const modalCompany = document.getElementById('modal-company'); 
+    const modalBody = document.getElementById('modal-body');
+    const modalTags = document.getElementById('modal-tags'); 
 
     // =========================================================
     // 02. NAVIGATION & SCROLL
@@ -91,10 +95,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Remplissage et affichage de la modale
-            document.getElementById('modal-title').innerText = title;
-            document.getElementById('modal-company').innerText = company;
-            document.getElementById('modal-body').innerHTML = descriptionHTML;
-            document.getElementById('modal-tags').innerHTML = tags;
+            modalTitle.innerText = title;
+            modalCompany.innerText = company; // Renseigné pour projets/formations
+            modalBody.innerHTML = descriptionHTML;
+            modalTags.innerHTML = tags;
 
             modal.style.display = 'flex';
         });
@@ -113,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // =========================================================
-    // 04. NOUVEAU : GESTION DE LA MODALE HOBBIES
+    // 04. GESTION DE LA MODALE HOBBIES
     // =========================================================
     
     const btnShowHobbies = document.getElementById('btn-show-hobbies');
@@ -123,14 +127,27 @@ document.addEventListener('DOMContentLoaded', () => {
         btnShowHobbies.addEventListener('click', () => {
             
             // Remplir la modale avec le contenu de #hobbies-details
+<<<<<<< Updated upstream
             document.getElementById('modal-title').innerText = "Mes Hobbies et Compétences Douces (Soft Skills)";
             document.getElementById('modal-company').innerText = "Découvrez ma personnalité et les qualités que ces activités développent.";
             document.getElementById('modal-body').innerHTML = hobbiesDetails.innerHTML;
             
             // Tags spécifiques pour les hobbies
             document.getElementById('modal-tags').innerHTML = "<span>Photographie</span><span>Jeux Vidéo</span><span>Kendo</span><span>Discipline</span>";
+=======
+            modalTitle.innerText = "Mes Hobbies";
+            
+            modalBody.innerHTML = hobbiesDetails.innerHTML;
+            
+            // Tags spécifiques pour les hobbies
+            modalTags.innerHTML = `
+                <span>Personnel</span>
+                <span>Détente</span>
+                <span>Sport</span>
+            `;
+>>>>>>> Stashed changes
 
-            // Afficher la modale
+            // Afficher la modale (la seule et unique, #project-modal)
             modal.style.display = 'flex';
         });
     }
