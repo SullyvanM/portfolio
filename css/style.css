@@ -320,7 +320,7 @@ ul {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top; /* Correction du cadrage vers le haut */
+    object-position: top; 
     transition: transform 0.5s ease;
 }
 .project-card:hover .project-img { 
@@ -748,4 +748,74 @@ ul {
     .projects-header-v2 .accent-bar {
         height: 60px; /* Réduit la taille de la barre sur mobile */
     }
+}
+
+/* ========================================================= */
+/* 08. STYLES CARROUSEL/GALERIE D'IMAGES                     */
+/* ========================================================= */
+
+.gallery-content {
+    /* Élargir la modale pour le carrousel */
+    max-width: 900px !important; 
+    padding: 20px !important;
+    background-color: var(--bg-dark); /* Fond plus sombre pour l'image */
+    border: none !important;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    /* Ratio 16:9 pour les images (ou ajustez si les images 3D ont un autre ratio) */
+    padding-top: 56.25%; 
+    overflow: hidden;
+    margin-bottom: 10px;
+    border-radius: var(--border-radius);
+    background-color: #000;
+}
+
+.carousel-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* L'image est contenue sans être coupée */
+    transition: opacity 0.3s;
+}
+
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 15px 10px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    z-index: 10;
+    transition: background 0.3s;
+}
+
+.nav-btn:hover {
+    background: var(--accent);
+}
+
+#prev-btn {
+    left: 0;
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+}
+
+#next-btn {
+    right: 0;
+    border-top-left-radius: var(--border-radius);
+    border-bottom-left-radius: var(--border-radius);
+}
+
+.image-counter {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 10px;
 }
