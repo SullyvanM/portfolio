@@ -1,5 +1,5 @@
 /* ========================================================= */
-/* 01. TYPOGRAPHIE ET VARIABLES CSS                         */
+/* 01. TYPO ET VARIABLES CSS                                 */
 /* ========================================================= */
 :root {
     /* Couleurs */
@@ -8,7 +8,7 @@
     --text-main: #f0f0f0;
     --text-muted: #b0b0b0;
     --accent: #ff2e63; /* Couleur principale */
-    /* Typographie et Taille */
+    /* Typo et Taille */
     --font-jp: 'Noto Sans JP', sans-serif;
     --border-radius: 8px;
 }
@@ -42,7 +42,7 @@ ul {
 }
 
 /* ========================================================= */
-/* 02. NAVIGATION (NAVBAR) ET EN-TÊTE (HERO)                 */
+/* 02. NAVIGATION (NAVBAR) ET EN-TÊTE                        */
 /* ========================================================= */
 
 /* Navbar */
@@ -149,20 +149,17 @@ ul {
 
 .btn-secondary {
     padding: 12px 30px;
-    /* Contour ROUGE */
     border: 2px solid var(--accent);
-    /* Texte ROUGE */
     color: var(--accent);
-    /* Coins arrondis (comme l'autre bouton) */
+    /* Coins arrondis */
     border-radius: 4px;
     font-weight: bold;
-    
-    /* --- Correctifs essentiels pour les balises <button> --- */
-    background-color: transparent; /* Fond transparent par défaut */
-    cursor: pointer; /* Curseur main */
-    font-family: inherit; /* Utilise la police du site */
-    font-size: 1rem; /* Taille de texte correcte */
-    transition: 0.3s all ease; /* Animation fluide */
+    /
+    background-color: transparent; 
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem; 
+    transition: 0.3s all ease;
 }
 
 .btn-main:hover { 
@@ -171,9 +168,8 @@ ul {
 }
 
 .btn-secondary:hover {
-    /* Au survol : Remplissage ROUGE */
+    /* Au survol : Remplissage rouge + text blanc */
     background: var(--accent);
-    /* Texte BLANC pour le contraste */
     color: white;
 }
 
@@ -264,7 +260,7 @@ ul {
     margin-bottom: 20px; 
 }
 
-/* Cartes Expériences & Formations */
+/* Cartes Formations */
 .project-card, .formation-card {
     background: var(--bg-card); 
     border-radius: var(--border-radius); 
@@ -298,7 +294,7 @@ ul {
     transform: scale(1.05); 
 }
 
-/* Placeholder (pour formations) */
+/* Placeholder (Si besoin) */
 .placeholder-img {
     width: 100%; 
     height: 100%; 
@@ -447,9 +443,7 @@ ul {
         padding: 15px 20px; 
     }
     
-    /* ------------------------------------- */
-    /* GESTION DU MENU HAMBURGER */
-    /* ------------------------------------- */
+    /* Gestion menu hamburger */
     .nav-links { 
         display: none; /* Masque les liens par défaut */
     } 
@@ -575,7 +569,7 @@ ul {
 /* 06. STYLES SPÉCIFIQUES POUR LE CONTENU DE LA MODALE HOBBIES */
 /* ========================================================= */
 
-.hobbies-grid { /* Renommé pour la cohérence */
+.hobbies-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 15px; 
@@ -616,6 +610,5 @@ ul {
 /* Ajustement pour les très petits écrans à l'intérieur de la modale */
 @media (max-width: 550px) {
     .hobby-item {
-        /* Ne pas forcer le flex-basis si l'on utilise grid (auto-fit gère déjà ça) */
     }
 }

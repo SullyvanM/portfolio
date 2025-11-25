@@ -126,7 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnShowHobbies && hobbiesDetails) {
         btnShowHobbies.addEventListener('click', () => {
             
-            // Remplir la modale avec le contenu de #hobbies-details
             modalTitle.innerText = "Mes Hobbies";
 
             // Vider champ "entreprise" pour les hobbies
@@ -134,14 +133,13 @@ document.addEventListener('DOMContentLoaded', () => {
             
             modalBody.innerHTML = hobbiesDetails.innerHTML;
             
-            // Tags spécifiques pour les hobbies
+            // Tags hobbies
             modalTags.innerHTML = `
                 <span>Personnel</span>
                 <span>Détente</span>
                 <span>Sport</span>
             `;
 
-            // Afficher la modale (la seule et unique, #project-modal)
             modal.style.display = 'flex';
         });
     }
