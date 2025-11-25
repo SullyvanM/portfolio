@@ -127,10 +127,8 @@ document.addEventListener('DOMContentLoaded', () => {
         btnShowHobbies.addEventListener('click', () => {
             
             // Remplir la modale avec le contenu de #hobbies-details
-            modalTitle.innerText = "Mes Hobbies & Intérêts";
+            modalTitle.innerText = "Mes Hobbies";
             
-            // ⭐ Vider/remplacer le champ "entreprise" pour les hobbies
-            modalCompany.innerText = "Passions personnelles"; 
             
             modalBody.innerHTML = hobbiesDetails.innerHTML;
             
@@ -138,6 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
             modalTags.innerHTML = `
                 <span>Personnel</span>
                 <span>Détente</span>
+                <span>Sport</span>
             `;
 
             // Afficher la modale (la seule et unique, #project-modal)
