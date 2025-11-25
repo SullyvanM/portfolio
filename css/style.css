@@ -7,7 +7,9 @@
     --bg-card: #1e1e1e;
     --text-main: #f0f0f0;
     --text-muted: #b0b0b0;
-    --accent: #ff2e63; /* Couleur principale */
+    --accent: #ff2e63; /* Couleur principale (Rouge/Rose) */
+    --border-color: #333;
+
     /* Typo et Taille */
     --font-jp: 'Noto Sans JP', sans-serif;
     --border-radius: 8px;
@@ -57,7 +59,7 @@ ul {
     background: rgba(18, 18, 18, 0.95);
     backdrop-filter: blur(10px);
     z-index: 1000;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .logo { 
@@ -87,14 +89,37 @@ ul {
 
 /* Hero Section */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: radial-gradient(circle at center, #2a2a2a 0%, #121212 70%);
     padding: 0 20px;
+    position: relative; 
+    
+    /* Image temple_inari.jpg */
+    background: url('../assets/images/temple_inari.jpg') no-repeat center center/cover;
 }
+
+/* Voile sombre pour garantir la lisibilité du texte sur l'image */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Opacité ajustée pour une bonne lisibilité (0.85 est souvent idéal) */
+    background: rgba(18, 18, 18, 0.85); 
+    z-index: 1; 
+}
+/* Le contenu du hero doit être au-dessus du voile */
+.hero > * {
+    z-index: 10; 
+    position: relative;
+}
+
+
 .hero h1 { 
     font-size: 3.5rem; 
     margin: 10px 0; 
@@ -117,6 +142,12 @@ ul {
     background: var(--accent); 
     opacity: 0.3; 
     z-index: -1;
+}
+
+/* CORRECTION DEMANDÉE : Désactive le surlignage dans le Hero pour le nom */
+.hero .red-circle::after {
+    content: none !important; /* Supprime le pseudo-élément (le surlignage) */
+    height: 0 !important;
 }
 
 .hero .subtitle { 
@@ -145,16 +176,15 @@ ul {
     border-radius: 4px; 
     font-weight: bold; 
     cursor: pointer;
+    transition: 0.3s all ease;
 }
 
 .btn-secondary {
     padding: 12px 30px;
     border: 2px solid var(--accent);
     color: var(--accent);
-    /* Coins arrondis */
     border-radius: 4px;
     font-weight: bold;
-    /
     background-color: transparent; 
     cursor: pointer;
     font-family: inherit;
@@ -260,7 +290,7 @@ ul {
     margin-bottom: 20px; 
 }
 
-/* Cartes Formations */
+/* Cartes Formations / Projets */
 .project-card, .formation-card {
     background: var(--bg-card); 
     border-radius: var(--border-radius); 
@@ -285,10 +315,11 @@ ul {
     border-top-right-radius: var(--border-radius);
 }
 .project-img {
-    width: 100%; 
-    height: 100%; 
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    object-position: top; /* Correction du cadrage vers le haut */
+    transition: transform 0.5s ease;
 }
 .project-card:hover .project-img { 
     transform: scale(1.05); 
@@ -379,9 +410,18 @@ ul {
     color: var(--text-muted);
     text-decoration: none;
     transition: color 0.3s;
+    font-size: 1.1rem; /* Taille du texte */
+    display: flex; 
+    align-items: center;
+    margin-bottom: 15px;
+}
+.socials a i {
+    margin-right: 15px;
+    color: var(--accent); /* Icône en couleur accent */
+    font-size: 1.5rem; /* Taille de l'icône */
 }
 .socials a:hover {
-    color: var(--accent);
+    color: var(--accent); /* Le texte devient rouge au survol */
 }
 
 /* Formulaire à droite */
@@ -582,8 +622,13 @@ ul {
     background: var(--bg-dark); 
     padding: 15px;
     border-radius: var(--border-radius);
-    border-left: 3px solid var(--accent); 
+    border: 1px solid #333; 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    transition: border-color 0.3s;
+}
+
+.hobby-item:hover {
+    border-color: var(--accent); 
 }
 
 .hobby-item h4 {
@@ -607,8 +652,73 @@ ul {
     color: var(--accent); 
 }
 
+/* Les tags affichés sous les cartes de hobbies */
+.hobbies-tags {
+    margin-top: 30px; 
+    text-align: center;
+    border-top: 1px dashed #333;
+    padding-top: 20px;
+}
+
+.hobbies-tags span {
+    display: inline-block;
+    font-size: 0.9rem;
+    background: #333; 
+    color: var(--text-muted); 
+    padding: 6px 12px;
+    border-radius: 20px; 
+    margin: 5px;
+    border: 1px solid #555;
+}
+
 /* Ajustement pour les très petits écrans à l'intérieur de la modale */
 @media (max-width: 550px) {
-    .hobby-item {
+    .hobbies-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========================================================= */
+/* 07. STYLES SPÉCIFIQUES PAGE PROJETS (CENTRÉ)              */
+/* ========================================================= */
+
+.projects-header-centered {
+    padding-top: 120px; 
+    padding-bottom: 60px;
+    background-color: var(--bg-dark);
+    text-align: center; /* Centrage du texte */
+    border-bottom: 1px solid var(--border-color);
+}
+
+.projects-header-centered h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 5px; 
+    border: none; /* Supprime toute bordure héritée de .section-title */
+}
+
+.projects-header-centered .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    margin: 0;
+}
+
+/* Style Bouton de Téléchargement dans la Carte Projet */
+.download-btn {
+    text-align: center; 
+    display: block; 
+    margin-top: 20px; 
+    margin-bottom: 5px; 
+}
+
+/* RESPONSIVE MOBILE pour le Header Projets */
+@media (max-width: 768px) {
+    .projects-header-centered h1 {
+        font-size: 2rem;
+    }
+    .projects-header-centered .subtitle {
+        font-size: 0.9rem;
     }
 }

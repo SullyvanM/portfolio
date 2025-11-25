@@ -4,27 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mes Projets - Sullyvan Modeste</title>
-    <link rel="stylesheet" href="css/style.css">
+    
+    <link rel="stylesheet" href="css/style.css?v=1">
+    
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
     <nav class="navbar">
-        <div class="logo">SULLYVAN MODESTE</div>
+        <div class="logo">PORTFOLIO</div>
         <ul class="nav-links">
             <li><a href="index.html">Retour à l'accueil</a></li>
+            <li><a href="index.html#contact">Me Contacter</a></li>
         </ul>
         <div class="hamburger">
             <i class="fas fa-bars"></i>
         </div>
     </nav>
 
-    <header class="section bg-alt" style="padding-top: 150px; text-align: center;">
-        <h1 class="section-title" style="justify-content: center;">Mes Projets</h1>
-        <p class="description" style="max-width: 800px; margin: 0 auto;">
-            Détails techniques et réalisations académiques.
-        </p>
+    <header class="projects-header-v2">
+        <div class="title-wrapper">
+            <div class="accent-bar"></div>
+            
+            <div class="text-content">
+                <h1>Mes Projets</h1>
+                <p class="subtitle">Détails techniques et mes réalisations</p>
+            </div>
+        </div>
     </header>
 
     <section class="section">
@@ -32,54 +39,137 @@
             
             <article class="project-card">
                 <div class="card-image">
-                    <img src="assets/images/project_slime.jpg" alt="Run N Swipe Game" class="project-img">
+                    <img src="assets/images/project_slime.jpg" alt="Jeu Run N Swipe" class="project-img" onerror="this.src='https://via.placeholder.com/400x300?text=Run+N+Swipe'">
                 </div>
                 <div class="card-content">
                     <h3>Run’ N Swipe</h3>
-                    <p class="company">Projet de fin d'année (M2i Promotion 2021)</p>
-                    <p>Runner 3D multijoueur local (16 joueurs) où le smartphone sert de manette.</p>
+                    <p class="company">Projet d'études</p>
+                    <p>Runner 3D multijoueur local (16 joueurs) interactif via smartphone.</p>
                     
                     <div class="hidden-details" style="display:none;">
                         <p><strong>Run’ N Swipe - "Attention à votre Slime!"</strong></p>
                         <p>
-                            Jeu de type "runner" 3D développé sous Unity. Le but est de survivre à une course d'obstacles générés procéduralement selon la musique choisie.
-                            La particularité : le jeu tourne sur PC/TV, et jusqu'à 16 joueurs rejoignent la partie avec leur smartphone en scannant un QR Code.
+                            Jeu de type "runner" 3D développé sous Unity. Le but est de survivre à une course d'obstacles générés procéduralement selon la musique.
+                            <br>Concept "Party Game" : le jeu tourne sur un écran principal (PC/TV), et jusqu'à 16 joueurs rejoignent la partie en utilisant leur smartphone comme manette via un QR Code.
                         </p>
                         
-                        <h4>Défis Techniques & Stack :</h4>
+                        <h4>Défis Techniques :</h4>
                         <ul>
-                            <li><strong>Moteur & Langage :</strong> Unity 2019, C#.</li>
-                            <li><strong>Réseau (LAN) :</strong> Architecture Client/Serveur utilisant la librairie MLAPI et le protocole LiteNetLib pour gérer 16 connexions simultanées avec faible latence.</li>
-                            <li><strong>Génération Procédurale :</strong> Algorithme d'analyse du spectre audio pour placer les obstacles (trous, murs) en rythme avec la musique.</li>
-                            <li><strong>Cross-Platform :</strong> Communication temps réel entre le serveur Windows et les clients Android via sockets.</li>
+                            <li><strong>Architecture Réseau :</strong> Client/Serveur local (LAN) via MLAPI et LiteNetLib.</li>
+                            <li><strong>Génération Procédurale :</strong> Algorithme d'analyse de spectre audio (FFT).</li>
+                            <li><strong>Cross-Device :</strong> Communication temps réel Windows <-> Android via Sockets.</li><br>
                         </ul>
-
-                        <p><strong>Mon rôle dans l'équipe :</strong> Sound Designer & Modélisateur 3D (Blender/Maya).</p>
+                        <p><strong>Mon Rôle :</strong> Développeur, Sound Designer & Modélisation 3D.</p>
+                         <a href="assets/downloads/Technical_Design_Document_RunNSwipe.pdf" target="_blank" download class="btn-main download-btn">Télécharger le Technical Design Document (PDF)</a>
                     </div>
 
                     <div class="tags">
-                        <span>Unity</span><span>C#</span><span>MLAPI</span><span>Android</span>
+                        <span>Unity 3D</span><span>C#</span><span>Réseau</span><span>Android</span>
                     </div>
                 </div>
             </article>
 
-            </div>
+            <article class="project-card">
+                <div class="card-image">
+                    <img src="assets/images/projet_2.jpg" alt="Titre Projet 2" class="project-img" onerror="this.src='https://via.placeholder.com/400x300?text=Projet+2'">
+                </div>
+                <div class="card-content">
+                    <h3>Titre du Projet 2</h3>
+                    <p class="company">Contexte (Perso / Pro / École)</p>
+                    <p>Description courte affichée sur la carte...</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p><strong>Titre complet du projet</strong></p>
+                        <p>Description détaillée qui s'affichera dans la modale.</p>
+                        <ul>
+                            <li>Point clé 1</li>
+                            <li>Point clé 2</li>
+                        </ul>
+                    </div>
+
+                    <div class="tags">
+                        <span>Tag 1</span><span>Tag 2</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="card-image">
+                    <img src="assets/images/projet_3.jpg" alt="Titre Projet 3" class="project-img" onerror="this.src='https://via.placeholder.com/400x300?text=Projet+3'">
+                </div>
+                <div class="card-content">
+                    <h3>Titre du Projet 3</h3>
+                    <p class="company">Contexte</p>
+                    <p>Description courte...</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p>Détails...</p>
+                    </div>
+
+                    <div class="tags">
+                        <span>Tag A</span><span>Tag B</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="card-image">
+                    <img src="assets/images/projet_4.jpg" alt="Titre Projet 4" class="project-img" onerror="this.src='https://via.placeholder.com/400x300?text=Projet+4'">
+                </div>
+                <div class="card-content">
+                    <h3>Titre du Projet 4</h3>
+                    <p class="company">Contexte</p>
+                    <p>Description courte...</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p>Détails...</p>
+                    </div>
+
+                    <div class="tags">
+                        <span>Tag</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="card-image">
+                    <img src="assets/images/projet_5.jpg" alt="Titre Projet 5" class="project-img" onerror="this.src='https://via.placeholder.com/400x300?text=Projet+5'">
+                </div>
+                <div class="card-content">
+                    <h3>Titre du Projet 5</h3>
+                    <p class="company">Contexte</p>
+                    <p>Description courte...</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p>Détails...</p>
+                    </div>
+
+                    <div class="tags">
+                        <span>Tag</span>
+                    </div>
+                </div>
+            </article>
+
+        </div>
     </section>
 
-    <footer id="contact">
-        <h2>Me Contacter <span class="jp-title">連絡</span></h2>
-        <div class="contact-details">
-            <p><i class="fas fa-envelope"></i> sullyvan.modeste@gmail.com</p>
-            <a href="https://www.linkedin.com/in/modeste-sullyvan/" target="_blank" style="color:#b0b0b0"><i class="fab fa-linkedin"></i> LinkedIn</a>
+    <footer class="main-footer">
+        <div class="socials" style="margin-bottom: 20px;">
+            <a href="https://www.linkedin.com/in/modeste-sullyvan/" target="_blank">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="mailto:sullyvan.modeste@gmail.com" style="margin-left: 20px;">
+                <i class="fas fa-envelope"></i> Me contacter
+            </a>
         </div>
-        <p class="copyright">© 2025 Sullyvan Modeste</p>
+        <p class="copyright">© 2025 Sullyvan Modeste | Portfolio IT</p>
     </footer>
 
     <div id="project-modal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
             <h3 id="modal-title">Titre</h3>
-            <p id="modal-company" class="company">Contexte</p>
+            <p id="modal-company" class="company"></p>
             <div id="modal-body">Description...</div>
             <div id="modal-tags" class="tags"></div>
         </div>
