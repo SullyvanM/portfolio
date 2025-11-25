@@ -31,6 +31,8 @@ body {
     background-color: var(--bg-dark);
     color: var(--text-main);
     line-height: 1.6;
+    /* CORRECTION DU BUG POINT NOIR/DÉBORDEMENT */
+    overflow-x: hidden; 
 }
 
 /* Styles des liens et listes */
@@ -679,33 +681,49 @@ ul {
 }
 
 /* ========================================================= */
-/* 07. STYLES SPÉCIFIQUES PAGE PROJETS (CENTRÉ)              */
+/* 07. STYLES SPÉCIFIQUES PAGE PROJETS (projects.html)       */
 /* ========================================================= */
 
-.projects-header-centered {
+/* CORRECTION : Style de l'en-tête de la page Projets (.projects-header-v2) */
+.projects-header-v2 {
     padding-top: 120px; 
-    padding-bottom: 60px;
+    padding-bottom: 50px;
     background-color: var(--bg-dark);
-    text-align: center; /* Centrage du texte */
     border-bottom: 1px solid var(--border-color);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 50px; 
+    padding-right: 50px;
 }
 
-.projects-header-centered h1 {
-    font-size: 3rem;
+.projects-header-v2 .title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.projects-header-v2 .accent-bar {
+    width: 5px;
+    height: 90px; /* Hauteur de la barre rouge */
+    background: var(--accent);
+    flex-shrink: 0; 
+}
+
+.projects-header-v2 h1 {
+    font-size: 2.5rem;
     font-weight: 700;
     color: var(--text-main);
-    margin-bottom: 5px; 
-    border: none; /* Supprime toute bordure héritée de .section-title */
+    margin-bottom: 5px;
 }
 
-.projects-header-centered .subtitle {
+.projects-header-v2 .subtitle {
     font-size: 1.1rem;
     color: var(--text-muted);
     font-weight: 300;
     margin: 0;
 }
 
-/* Style Bouton de Téléchargement dans la Carte Projet */
+/* Style Bouton de Téléchargement dans la Carte Projet (Modale) */
 .download-btn {
     text-align: center; 
     display: block; 
@@ -715,10 +733,19 @@ ul {
 
 /* RESPONSIVE MOBILE pour le Header Projets */
 @media (max-width: 768px) {
-    .projects-header-centered h1 {
+    .projects-header-v2 {
+        padding-top: 80px;
+        padding-bottom: 30px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .projects-header-v2 h1 {
         font-size: 2rem;
     }
-    .projects-header-centered .subtitle {
+    .projects-header-v2 .subtitle {
         font-size: 0.9rem;
+    }
+    .projects-header-v2 .accent-bar {
+        height: 60px; /* Réduit la taille de la barre sur mobile */
     }
 }
