@@ -1,750 +1,621 @@
-/* =========================================================
-   00. VARIABLES & RÉINITIALISATION
-   ========================================================= */
+/* ========================================================= */
+/* 01. TYPOGRAPHIE ET VARIABLES CSS                         */
+/* ========================================================= */
 :root {
-    --primary: #121212; /* Fond sombre principal */
-    --secondary: #212121; /* Fond sombre alternatif (sections, cartes) */
-    --accent: #e74c3c; /* Rouge pour l'accentuation et les liens */
-    --text-light: #ffffff;
-    --text-muted: #aaaaaa;
-    --shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-    --border-color: #333;
+    /* Couleurs */
+    --bg-dark: #121212;
+    --bg-card: #1e1e1e;
+    --text-main: #f0f0f0;
+    --text-muted: #b0b0b0;
+    --accent: #ff2e63; /* Couleur principale */
+    /* Typographie et Taille */
+    --font-jp: 'Noto Sans JP', sans-serif;
+    --border-radius: 8px;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Réinitialisation de base */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+html { 
+    scroll-behavior: smooth; 
 }
 
+/* Style du corps de page */
 body {
-    font-family: 'Noto Sans JP', sans-serif;
-    background-color: var(--primary);
-    color: var(--text-light);
+    font-family: var(--font-jp);
+    background-color: var(--bg-dark);
+    color: var(--text-main);
     line-height: 1.6;
 }
 
-a {
-    color: var(--text-light);
-    text-decoration: none;
-    transition: color 0.3s ease;
+/* Styles des liens et listes */
+a { 
+    text-decoration: none; 
+    color: inherit; 
+    transition: 0.3s; 
+}
+ul { 
+    list-style: none; 
 }
 
-a:hover {
-    color: var(--accent);
-}
+/* ========================================================= */
+/* 02. NAVIGATION (NAVBAR) ET EN-TÊTE (HERO)                 */
+/* ========================================================= */
 
-.section {
-    padding: 80px 5%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.bg-alt {
-    background-color: var(--secondary);
-}
-
-h1, h2, h3 {
-    margin-bottom: 20px;
-    font-weight: 700;
-}
-
-.section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 50px;
-    position: relative;
-    padding-bottom: 10px;
-    color: var(--text-light);
-}
-
-.section-title::after {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 3px;
-    background: var(--accent);
-    margin: 10px auto 0;
-}
-
-.jp-title {
-    color: var(--accent);
-    font-size: 0.7em;
-    opacity: 0.7;
-    margin-left: 10px;
-    font-weight: 300;
-}
-
-/* =========================================================
-   01. NAVIGATION & HERO
-   ========================================================= */
-
+/* Navbar */
 .navbar {
     position: fixed;
     top: 0;
-    left: 0;
     width: 100%;
-    z-index: 1000;
-    background: rgba(18, 18, 18, 0.95); /* Semi-transparent par défaut */
-    padding: 15px 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: background 0.3s ease, border-bottom 0.3s ease;
-    border-bottom: 1px solid var(--border-color); /* Bordure par défaut */
-    backdrop-filter: blur(5px);
+    padding: 20px 50px;
+    background: rgba(18, 18, 18, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid #333;
 }
 
-.logo {
-    font-weight: 700;
-    font-size: 1.5rem;
-    color: var(--accent);
+.logo { 
+    font-weight: 700; 
+    font-size: 1.2rem; 
+    letter-spacing: 1px; 
+}
+.logo .kanji { 
+    color: var(--accent); 
+    margin-left: 5px; 
 }
 
-.nav-links {
-    list-style: none;
-    display: flex;
+.nav-links { 
+    display: flex; 
+    gap: 30px; 
+}
+.nav-links a:hover { 
+    color: var(--accent); 
 }
 
-.nav-links li {
-    margin-left: 30px;
-}
-
-.nav-links a {
-    font-weight: 500;
-    padding: 5px 0;
-}
-
-.nav-links a:hover {
-    color: var(--accent);
-    border-bottom: 2px solid var(--accent);
-}
-
-.hamburger {
-    display: none; /* Masqué par défaut sur desktop */
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--text-light);
+/* Le hamburger est masqué par défaut en desktop */
+.hamburger { 
+    display: none; 
+    cursor: pointer; 
+    font-size: 1.5rem; 
 }
 
 /* Hero Section */
 .hero {
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: url('../assets/images/hero_background.jpg') no-repeat center center/cover;
-    padding-top: 60px; /* Pour la navbar fixe */
-    position: relative;
+    background: radial-gradient(circle at center, #2a2a2a 0%, #121212 70%);
+    padding: 0 20px;
+}
+.hero h1 { 
+    font-size: 3.5rem; 
+    margin: 10px 0; 
+    font-weight: 700; 
 }
 
-.hero::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(18, 18, 18, 0.75); /* Voile sombre */
+/* Effet de surlignage */
+.red-circle { 
+    color: var(--accent); 
+    position: relative; 
+    display: inline-block; 
+}
+.red-circle::after {
+    content: ''; 
+    position: absolute; 
+    bottom: 5px; 
+    left: 0; 
+    width: 100%; 
+    height: 10px;
+    background: var(--accent); 
+    opacity: 0.3; 
+    z-index: -1;
 }
 
-.hero-content {
-    position: relative;
-    z-index: 10;
-    max-width: 900px;
+.hero .subtitle { 
+    letter-spacing: 3px; 
+    text-transform: uppercase; 
+    color: var(--accent); 
+    font-weight: bold; 
+}
+.hero .description { 
+    max-width: 600px; 
+    margin: 0 auto 30px; 
+    color: var(--text-muted); 
+}
+.hero-btns { 
+    display: flex; 
+    gap: 20px; 
+    justify-content: center; 
 }
 
-.hero-content h1 {
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 1.2;
-    color: var(--text-light);
-    text-transform: uppercase;
-}
-
-.red-circle {
-    color: var(--accent);
-}
-
-.description {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    margin: 20px 0 40px;
-}
-
-.hero-btns {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-/* Boutons réutilisables */
-.btn-main, .btn-secondary {
-    padding: 12px 25px;
-    border-radius: 5px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    display: inline-block;
-}
-
+/* Boutons */
 .btn-main {
-    background-color: var(--accent);
-    color: var(--text-light);
-    border: 2px solid var(--accent);
-}
-
-.btn-main:hover {
-    background-color: transparent;
-    color: var(--accent);
+    padding: 12px 30px; 
+    border: 2px solid var(--accent); 
+    background: var(--accent);
+    color: white; 
+    border-radius: 4px; 
+    font-weight: bold; 
+    cursor: pointer;
 }
 
 .btn-secondary {
-    background-color: transparent;
-    color: var(--text-light);
-    border: 2px solid var(--text-light);
+    padding: 12px 30px;
+    /* Contour ROUGE */
+    border: 2px solid var(--accent);
+    /* Texte ROUGE */
+    color: var(--accent);
+    /* Coins arrondis (comme l'autre bouton) */
+    border-radius: 4px;
+    font-weight: bold;
+    
+    /* --- Correctifs essentiels pour les balises <button> --- */
+    background-color: transparent; /* Fond transparent par défaut */
+    cursor: pointer; /* Curseur main */
+    font-family: inherit; /* Utilise la police du site */
+    font-size: 1rem; /* Taille de texte correcte */
+    transition: 0.3s all ease; /* Animation fluide */
+}
+
+.btn-main:hover { 
+    background: transparent; 
+    color: var(--accent); 
 }
 
 .btn-secondary:hover {
-    background-color: var(--text-light);
-    color: var(--primary);
-    border-color: var(--text-light);
+    /* Au survol : Remplissage ROUGE */
+    background: var(--accent);
+    /* Texte BLANC pour le contraste */
+    color: white;
 }
 
-/* =========================================================
-   02. SECTION À PROPOS
-   ========================================================= */
+/* ========================================================= */
+/* 03. STRUCTURE DES SECTIONS ET DES GRILLES                 */
+/* ========================================================= */
 
-.about-container {
-    display: flex;
-    gap: 50px;
-    align-items: center;
+.section { 
+    padding: 80px 50px; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+}
+.bg-alt { 
+    background-color: #181818; 
+    width: 100%; 
+    max-width: 100%; 
 }
 
-.about-img {
-    flex: 1;
-    max-width: 350px;
-    min-width: 250px;
+/* Titre des sections */
+.section-title {
+    font-size: 2rem; 
+    margin-bottom: 50px; 
+    border-left: 5px solid var(--accent);
+    padding-left: 15px; 
+    display: flex; 
+    align-items: baseline;
+}
+.jp-title { 
+    font-size: 1.5rem; 
+    margin-left: 10px; 
+    color: #444; 
+    font-weight: 300; 
 }
 
+/* A Propos */
+.about-container { 
+    display: flex; 
+    gap: 50px; 
+    align-items: center; 
+    flex-wrap: wrap; 
+}
 .about-img img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    border: 3px solid var(--accent);
-    box-shadow: var(--shadow);
+    width: 300px; 
+    height: 300px; 
+    object-fit: cover; 
+    border-radius: 10px;
+    border: 3px solid var(--accent); 
+    box-shadow: 10px 10px 0px #333;
+}
+.about-text { 
+    flex: 1; 
+}
+.about-text h3 { 
+    margin-bottom: 20px; 
+    font-size: 1.5rem; 
+}
+.soft-skills { 
+    margin-top: 20px; 
+    display: flex; 
+    gap: 20px; 
+    color: var(--accent); 
+    font-weight: bold; 
 }
 
-.about-text {
-    flex: 2;
-}
-
-.about-text h3 {
-    color: var(--accent);
-    font-size: 1.7rem;
-    margin-bottom: 15px;
-}
-
-.about-text p {
-    margin-bottom: 15px;
-    color: var(--text-light);
-}
-
-.soft-skills {
-    margin-top: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.soft-skills span {
-    background: var(--secondary);
-    color: var(--text-light);
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-size: 0.9em;
-    border: 1px solid var(--accent);
-}
-
-.soft-skills i {
-    color: var(--accent);
-    margin-right: 5px;
-}
-
-/* =========================================================
-   03. SECTION COMPÉTENCES
-   ========================================================= */
-
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+/* Grilles pour Compétences, Projets, Formations */
+.skills-grid, .projects-grid, .formation-grid{
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
     gap: 30px;
 }
 
+/* Cartes Compétences */
 .skill-card {
-    background: var(--primary);
-    padding: 30px;
-    border-radius: 8px;
+    background: var(--bg-card); 
+    padding: 30px; 
+    border-radius: var(--border-radius); 
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    border: 1px solid transparent;
+    border: 1px solid #333; 
+    transition: transform 0.3s;
+}
+.skill-card:hover { 
+    transform: translateY(-5px); 
+    border-color: var(--accent); 
+}
+.skill-card i { 
+    font-size: 3rem; 
+    color: var(--accent); 
+    margin-bottom: 20px; 
 }
 
-.skill-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow);
-    border-color: var(--accent);
-}
-
-.skill-card i {
-    font-size: 3rem;
-    color: var(--accent);
-    margin-bottom: 15px;
-}
-
-.skill-card h3 {
-    font-size: 1.4rem;
-    color: var(--text-light);
-    margin-bottom: 10px;
-}
-
-.skill-card p {
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    margin: 5px 0;
-}
-
-/* =========================================================
-   04. EXPÉRIENCES & FORMATIONS (Card Styles)
-   ========================================================= */
-
-.projects-grid, .formation-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
+/* Cartes Expériences & Formations */
 .project-card, .formation-card {
-    background: var(--secondary);
-    border-radius: 8px;
+    background: var(--bg-card); 
+    border-radius: var(--border-radius); 
     overflow: hidden;
+    border: 1px solid #333; 
+    transition: 0.3s; 
+    display: flex; 
+    flex-direction: column;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
-    border: 1px solid transparent;
+}
+.project-card:hover, .formation-card:hover { 
+    transform: scale(1.02); 
+    border-color: #555; 
 }
 
-.project-card:hover, .formation-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow);
-    border-color: var(--accent);
-}
-
+/* Images et Contenu des cartes */
 .card-image {
     height: 200px;
+    width: 100%;
     overflow: hidden;
-    position: relative;
-    background-color: var(--primary);
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
 }
-
 .project-img {
-    width: 100%;
-    height: 100%;
+    width: 100%; 
+    height: 100%; 
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.3s ease;
+}
+.project-card:hover .project-img { 
+    transform: scale(1.05); 
 }
 
-.project-card:hover .project-img {
-    transform: scale(1.05);
-}
-
+/* Placeholder (pour formations) */
 .placeholder-img {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
+    width: 100%; 
+    height: 100%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    color: white;
 }
+.color-1 { background: #2c3e50; }
+.color-2 { background: #4a148c; }
+.color-3 { background: #1e3799; }
 
-.placeholder-img i {
-    color: var(--accent);
+.card-content { 
+    padding: 20px; 
+    flex-grow: 1; 
+    display: flex; 
+    flex-direction: column; 
 }
-
-.card-content {
-    padding: 20px;
+.card-content h3 { 
+    margin-bottom: 5px; 
 }
-
-.card-content h3 {
-    font-size: 1.4rem;
-    color: var(--text-light);
-    margin-bottom: 5px;
+.company { 
+    color: var(--accent); 
+    font-style: italic; 
+    font-size: 0.9rem; 
+    margin-bottom: 15px; 
 }
-
-.company {
-    color: var(--accent);
-    font-weight: 500;
-    font-size: 0.95rem;
-    margin-bottom: 15px;
+.tags { 
+    margin-top: auto; 
+    padding-top: 15px; 
 }
-
-.card-content p {
-    color: var(--text-muted);
-    font-size: 0.95rem;
-}
-
-.tags {
-    margin-top: 15px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
 .tags span {
-    background: var(--primary);
-    color: var(--accent);
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 0.8em;
-    font-weight: 500;
-    border: 1px solid var(--accent);
-}
-
-/* =========================================================
-   05. MODALE (Réutilisable pour Projets, Formations, Hobbies)
-   ========================================================= */
-
-/* 1. Conteneur de la modale (masqué par défaut) */
-.modal {
-    display: none; 
-    position: fixed;
-    z-index: 2000; 
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.9); 
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-/* 2. Contenu de la modale */
-.modal-content {
-    background-color: var(--secondary);
-    padding: 30px;
-    border: 1px solid var(--accent);
-    width: 90%;
-    max-width: 800px;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-    position: relative;
-    animation-name: animatetop;
-    animation-duration: 0.4s;
-    margin: auto;
-}
-
-@keyframes animatetop {
-    from {top: -300px; opacity: 0} 
-    to {top: 0; opacity: 1}
-}
-
-/* 3. Bouton de fermeture */
-.close-btn {
+    font-size: 0.8rem; 
+    background: #333; 
+    padding: 4px 8px;
+    border-radius: 4px; 
+    margin-right: 5px; 
     color: var(--text-muted);
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    line-height: 1;
 }
 
-.close-btn:hover,
-.close-btn:focus {
-    color: var(--accent);
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* 4. Style des éléments dans la modale */
-#modal-title {
-    color: var(--accent);
-    margin-bottom: 5px;
-}
-
-#modal-company {
-    color: var(--text-muted);
-    font-style: italic;
-    margin-bottom: 20px;
-    display: block; 
-}
-
-#modal-body {
-    max-height: 60vh;
-    overflow-y: auto;
-    padding-right: 15px; 
-    line-height: 1.6;
-    color: var(--text-light);
-    margin-bottom: 20px;
-}
-
-#modal-body ul {
-    list-style: disc;
-    margin-left: 20px;
-    padding-left: 0;
-    margin-top: 10px;
-    color: var(--text-light);
-}
-
-/* =========================================================
-   06. HOBBIES (Styles pour le contenu injecté)
-   ========================================================= */
-
-.hobbies-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.hobby-item {
-    background: var(--primary);
-    padding: 15px;
-    border-left: 3px solid var(--accent);
-    border-radius: 4px;
-}
-
-.hobby-item h4 {
-    margin-top: 0;
-    display: flex;
-    align-items: center;
-    color: var(--accent); /* Couleur accentuée pour les titres d'hobbies */
-}
-
-.hobby-item i {
-    margin-right: 10px;
-    font-size: 1.2em;
-}
-
-.hobby-item p {
-    color: var(--text-muted);
-    font-size: 0.9em;
-}
-
-
-/* =========================================================
-   07. CONTACT & FOOTER
-   ========================================================= */
+/* ========================================================= */
+/* 04. CONTACT ET FORMULAIRE                                 */
+/* ========================================================= */
 
 .contact-container {
     display: flex;
-    gap: 50px;
-    max-width: 800px;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 4rem;
+    max-width: 1000px;
     margin: 0 auto;
+    padding: 0 20px;
 }
 
+/* Infos à gauche */
 .contact-info-column {
     flex: 1;
+    padding-top: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
 .contact-details p {
-    margin-bottom: 15px;
+    margin-bottom: 0.8rem;
     font-size: 1.1rem;
-    color: var(--text-light);
+    display: flex;
+    align-items: center;
 }
-
 .contact-details i {
     color: var(--accent);
-    margin-right: 10px;
+    margin-right: 15px;
+    width: 25px;
+    text-align: center;
 }
 
-.socials a {
-    display: inline-flex;
-    align-items: center;
-    font-size: 1.1rem;
-    color: var(--text-light);
-    margin-top: 10px;
-}
-
-.socials i {
+/* Sociaux (LinkedIn, etc.) */
+.socials {
+    margin-top: 1.5rem;
     font-size: 1.5rem;
-    margin-right: 10px;
-    color: var(--text-light);
-    transition: color 0.3s ease;
 }
-
-.socials a:hover i {
+.socials a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.socials a:hover {
     color: var(--accent);
 }
 
+/* Formulaire à droite */
 .contact-form {
-    flex: 2;
-    background: var(--primary);
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.contact-form label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-    color: var(--text-light);
-}
-
-.contact-form input[type="text"],
-.contact-form input[type="email"],
-.contact-form textarea {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     width: 100%;
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    background-color: #333;
-    color: var(--text-light);
+    max-width: 400px; 
+}
+
+.form-group { 
+    margin-bottom: 0.8rem; 
+}
+.form-group label {
+    display: block; 
+    margin-bottom: 0.3rem;
+    font-weight: 500; 
+    color: #333;
+}
+.contact-form input, .contact-form textarea {
+    width: 100%; 
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px; 
+    font-family: inherit; 
     font-size: 1rem;
-    transition: border-color 0.3s ease;
 }
-
-.contact-form input:focus,
-.contact-form textarea:focus {
+.contact-form input:focus, .contact-form textarea:focus {
+    outline: none; 
     border-color: var(--accent);
-    outline: none;
+}
+.full-width { 
+    width: 100%; 
+    margin-top: 10px; 
+    padding: 10px;
 }
 
-.full-width {
-    width: 100%;
-}
-
+/* Footer */
 .main-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: var(--primary);
-    border-top: 1px solid var(--border-color);
+    text-align: center; 
+    padding: 30px 20px;
+    background: #0f0f0f; 
+    border-top: 1px solid #333;
+}
+.copyright { 
+    font-size: 0.8rem; 
+    color: #555; 
 }
 
-.copyright {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-}
+/* ========================================================= */
+/* 05. RESPONSIVE DESIGN (MOBILE) ET MODALE                  */
+/* ========================================================= */
 
-/* =========================================================
-   08. RESPONSIVE DESIGN
-   ========================================================= */
-
-@media (max-width: 992px) {
-    .hero-content h1 {
-        font-size: 3rem;
-    }
-
-    .about-container {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .about-img {
-        order: -1;
-        margin-bottom: 30px;
-        max-width: 300px;
-    }
-
-    .about-text {
-        text-align: left;
-    }
-
-    .soft-skills {
-        justify-content: center;
-    }
-
-    .contact-container {
-        flex-direction: column;
-    }
-    
-    .contact-info-column {
-        margin-bottom: 30px;
-        text-align: center;
-    }
-
-    .contact-details {
-        margin-bottom: 20px;
-    }
-
-    .socials {
-        justify-content: center;
-    }
-}
-
+/* Version mobile */
 @media (max-width: 768px) {
-    .section {
-        padding: 60px 5%;
-    }
-
-    .hero-content h1 {
-        font-size: 2.5rem;
+    .navbar { 
+        padding: 15px 20px; 
     }
     
-    /* Menu mobile */
-    .nav-links {
-        position: absolute;
-        top: 100%; 
-        left: 0;
-        flex-direction: column;
-        width: 100%;
-        background: var(--primary);
-        transform: translateX(-100%);
-        z-index: 999;
-        border-top: 1px solid var(--border-color);
-        height: 0;
-        overflow: hidden;
-        opacity: 0;
-        transition: transform 0.3s ease-in-out, height 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    }
-
-    .nav-links.active {
-        transform: translateX(0);
-        height: auto; 
-        opacity: 1;
-        padding-bottom: 20px;
-    }
-
-    .nav-links li {
-        text-align: center;
-        padding: 15px 0;
-        border-bottom: 1px solid var(--border-color);
-        margin-left: 0;
-    }
+    /* ------------------------------------- */
+    /* GESTION DU MENU HAMBURGER */
+    /* ------------------------------------- */
+    .nav-links { 
+        display: none; /* Masque les liens par défaut */
+    } 
     
-    .nav-links li:last-child {
-        border-bottom: none;
-    }
-
     .hamburger {
-        display: block; 
+        display: block; /* Affiche le hamburger sur mobile */
+    }
+    
+    /* Le JS ajoute la classe .active pour forcer l'affichage du menu */
+    .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 61px;
+        left: 0;
+        width: 100%;
+        background: var(--bg-dark);
+        padding: 20px;
+        border-top: 1px solid #333;
+        z-index: 999;
     }
 
-    .hero-btns {
-        flex-direction: column;
-        gap: 15px;
+    .nav-links.active li {
+        text-align: center;
+        margin: 10px 0;
+    }
+    /* ------------------------------------- */
+
+    .hero h1 { 
+        font-size: 2.5rem; 
+    }
+    .about-container { 
+        flex-direction: column; 
+        text-align: center; 
+    }
+    .soft-skills { 
+        justify-content: center; 
+    }
+    .section { 
+        padding: 50px 20px; 
+    }
+    
+    /* Contact Mobile */
+    .contact-container {
+        flex-direction: column; 
+        gap: 2rem;
+    }
+    
+    .contact-info-column { 
+        width: 100%;
+        text-align: center; 
+    }
+    
+    .contact-details p { 
+        justify-content: center; 
+    }
+    
+    .contact-form {
+        max-width: 100%;
     }
 }
 
-@media (max-width: 576px) {
-    .modal-content {
-        padding: 20px;
-        width: 95%;
+/* Popup/Modale */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 2000; 
+    left: 0; 
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px); 
+    justify-content: center; 
+    align-items: center; 
+    padding: 20px;
+}
+.modal-content {
+    background-color: var(--bg-card); 
+    border: 1px solid var(--accent);
+    padding: 40px; 
+    border-radius: 8px; 
+    width: 100%; 
+    max-width: 600px;
+    position: relative; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    animation: slideIn 0.3s ease-out;
+}
+@keyframes slideIn {
+    from { 
+        transform: translateY(50px); 
+        opacity: 0; 
     }
+    to { 
+        transform: translateY(0); 
+        opacity: 1; 
+    }
+}
+.close-btn {
+    position: absolute; 
+    top: 15px; 
+    right: 20px; 
+    color: var(--text-muted);
+    font-size: 30px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: 0.3s;
+}
+.close-btn:hover { 
+    color: var(--accent); 
+}
+#modal-body ul { 
+    list-style: disc outside; 
+    margin-left: 20px; 
+    margin-top: 10px; 
+    color: var(--text-muted); 
+}
+#modal-body p { 
+    margin-bottom: 10px; 
+}
 
-    .hobbies-grid {
-        grid-template-columns: 1fr;
+/* ========================================================= */
+/* 06. STYLES SPÉCIFIQUES POUR LE CONTENU DE LA MODALE HOBBIES */
+/* ========================================================= */
+
+.hobbies-grid { /* Renommé pour la cohérence */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px; 
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed #333; 
+}
+
+.hobby-item {
+    background: var(--bg-dark); 
+    padding: 15px;
+    border-radius: var(--border-radius);
+    border-left: 3px solid var(--accent); 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.hobby-item h4 {
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.hobby-item p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: 5px;
+    line-height: 1.4;
+}
+
+.hobby-item i {
+    font-size: 1.2rem;
+    margin-right: 8px;
+    color: var(--accent); 
+}
+
+/* Ajustement pour les très petits écrans à l'intérieur de la modale */
+@media (max-width: 550px) {
+    .hobby-item {
+        /* Ne pas forcer le flex-basis si l'on utilise grid (auto-fit gère déjà ça) */
     }
 }
