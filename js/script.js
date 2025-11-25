@@ -128,7 +128,9 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Remplir la modale avec le contenu de #hobbies-details
             modalTitle.innerText = "Mes Hobbies";
-            
+
+            // Vider champ "entreprise" pour les hobbies
+            modalCompany.innerText = ""; 
             
             modalBody.innerHTML = hobbiesDetails.innerHTML;
             
