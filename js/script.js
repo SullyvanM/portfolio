@@ -39,14 +39,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const galleryContainer = galleryModal ? galleryModal.querySelector('.carousel-container') : null;
     
     let galleryCloseBtn = null;
-    let carouselImage = null;
+    let carouselImage = null; // L'image unique du carrousel (sera recréée dynamiquement si besoin)
     let prevBtn = null;
     let nextBtn = null;
     let imageCounter = null;
 
     if (galleryModal) {
         galleryCloseBtn = galleryModal.querySelector('.gallery-close-btn');
-        carouselImage = document.getElementById('carousel-image');
+        // Note : carouselImage peut être null au début si on a vidé le container, on le gère plus bas
         prevBtn = document.getElementById('prev-btn');
         nextBtn = document.getElementById('next-btn');
         imageCounter = document.getElementById('image-counter');
@@ -142,21 +142,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (galleryPath && galleryImages && galleryContainer) {
                     
-                    // --- DESACTIVE LE MODE SLIDER (Mode Galerie Statique) ---
-                    galleryContainer.classList.remove('slider-mode');
+                    // --- CONFIGURATION MODE GRILLE PHOTO ---
+                    galleryContainer.classList.remove('slider-mode'); // Désactive le carrousel
+                    galleryContainer.classList.add('photo-grid-mode'); // Active la grille CSS
 
                     galleryContainer.innerHTML = ''; // Vide le conteneur
                     const imageNames = galleryImages.split(',');
                     let imageHTML = '';
 
-                    // Crée les balises <img> pour chaque image (Défilement vertical)
+                    // Crée les balises avec la structure pour la grille
                     imageNames.forEach(imageName => {
-                        imageHTML += `<img src="${galleryPath}${imageName.trim()}" alt="Photographie" style="max-width: 100%; height: auto; margin-bottom: 20px;">`;
+                        imageHTML += `
+                            <div class="photo-item">
+                                <img src="${galleryPath}${imageName.trim()}" alt="Photographie" loading="lazy">
+                            </div>`;
                     });
 
                     galleryContainer.innerHTML = imageHTML;
                     
-                    // Masque les contrôles de carrousel (uniquement pour la vue statique)
+                    // Masque les contrôles de carrousel (car inutile en mode grille)
                     if (prevBtn) prevBtn.style.display = 'none';
                     if (nextBtn) nextBtn.style.display = 'none';
                     if (imageCounter) imageCounter.style.display = 'none';
@@ -212,12 +216,12 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // 3.4 Fermeture des Modales au clic extérieur (AJUSTÉ)
+        // 3.4 Fermeture des Modales au clic extérieur
         window.addEventListener('click', (e) => {
             if (e.target === projectModal) {
                 projectModal.style.display = 'none';
             }
-            // Si c'est la modale galerie, on appelle la fonction de fermeture (qui réinitialise l'état)
+            // Si c'est la modale galerie, on appelle la fonction de fermeture
             if (e.target === galleryModal) {
                  if (galleryCloseBtn) {
                     galleryCloseBtn.click();
@@ -231,17 +235,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================================
     // 04. GESTION MODALE CARROUSEL (pour le bouton Modélisation 3D)
     // =========================================================
-    if (galleryModal && carouselImage && prevBtn && nextBtn && galleryContainer) {
+    if (galleryModal && prevBtn && nextBtn && galleryContainer) {
         
-        // Fonction pour afficher l'image actuelle du carrousel
+        // Fonction pour mettre à jour l'image (si l'élément img existe)
         const updateCarousel = () => {
-            if (currentImages.length === 0) return;
+            // On récupère l'image qui a été injectée dynamiquement
+            const imgElement = document.getElementById('carousel-image');
+            if (currentImages.length === 0 || !imgElement) return;
             
-            // Le chemin est déterminé au moment de l'ouverture pour gérer les différents dossiers
-            carouselImage.src = currentPath + currentImages[currentIndex].trim(); 
+            imgElement.src = currentPath + currentImages[currentIndex].trim(); 
             
             // Mise à jour du compteur
-            imageCounter.textContent = `${currentIndex + 1} / ${currentImages.length}`;
+            if(imageCounter) imageCounter.textContent = `${currentIndex + 1} / ${currentImages.length}`;
         };
     
         // 4.1 Navigation (Précédent / Suivant)
@@ -268,62 +273,57 @@ document.addEventListener('DOMContentLoaded', () => {
                     projectModal.style.display = 'none'; 
                 }
 
-                // --- AJOUT IMPORTANT : ACTIVE LE MODE SLIDER ---
+                // --- CONFIGURATION MODE CARROUSEL (SLIDER) ---
                 if (galleryContainer) {
-                    galleryContainer.classList.add('slider-mode'); // Ajoute la classe CSS spéciale
-                    galleryContainer.scrollTop = 0; // Remet le scroll en haut
+                    galleryContainer.classList.remove('photo-grid-mode'); // Retire le mode grille
+                    galleryContainer.classList.add('slider-mode'); // Active le mode slider
+                    galleryContainer.scrollTop = 0; 
                 }
 
-                // Afficher les contrôles du carrousel pour la 3D
-                // C'est ce qui rend les flèches visibles (combiné avec le CSS .slider-mode .nav-btn)
+                // Afficher les contrôles du carrousel
                 if (prevBtn) prevBtn.style.display = 'block';
                 if (nextBtn) nextBtn.style.display = 'block';
                 if (imageCounter) imageCounter.style.display = 'block';
 
                 // On récupère les données
                 const imagesString = openGalleryBtn.getAttribute('data-images') || '';
-                
-                // CORRECTION DU CHEMIN : Ajout de 'projets/'
                 currentPath = 'assets/images/projets/modelisation/'; 
-
                 currentImages = imagesString ? imagesString.split(',') : [];
             
                 if (currentImages.length > 0) {
                     currentIndex = 0;
                     
-                    // On vide le conteneur puis on injecte le carrousel (cache les images statiques)
-                    galleryContainer.innerHTML = '';
-                    galleryContainer.appendChild(carouselImage); 
+                    // On injecte l'image unique pour le carrousel
+                    galleryContainer.innerHTML = `<img id="carousel-image" src="" alt="Capture 3D" class="carousel-img">`;
                     
-                    // On s'assure que l'image du carrousel est visible
-                    carouselImage.style.display = 'block';
-                    
+                    // Mise à jour immédiate de la source
                     updateCarousel();
+                    
                     galleryModal.style.display = 'flex';
                 }
             }
         });
         
-        // 4.3 Gestion de la fermeture de la galerie (CORRIGÉ)
+        // 4.3 Gestion de la fermeture de la galerie
         if (galleryCloseBtn) {
             galleryCloseBtn.addEventListener('click', () => {
                 galleryModal.style.display = 'none';
 
-                // --- CORRECTION : Réinitialisation de l'état du carrousel après fermeture ---
+                // --- NETTOYAGE ---
                 if (galleryContainer) {
-                    galleryContainer.classList.remove('slider-mode'); // Désactive le mode carrousel (essentiel)
+                    galleryContainer.classList.remove('slider-mode'); 
+                    galleryContainer.classList.remove('photo-grid-mode');
                 }
-                // Masque les flèches pour les futures ouvertures en mode Galerie Statique (Photographie)
+                // Masque les flèches
                 if (prevBtn) prevBtn.style.display = 'none';
                 if (nextBtn) nextBtn.style.display = 'none';
-                // -----------------------------------------------------------------------------
             });
         }
     
         // 4.4 Navigation au clavier pour la Galerie
         document.addEventListener('keydown', (e) => {
-            // Vérifie si la modale est visible ET si on est en mode carrousel (plus d'une image)
-            if (galleryModal.style.display === 'flex' && currentImages.length > 1) { 
+            // Vérifie si la modale est visible ET si on est en mode carrousel (vérification via la classe)
+            if (galleryModal.style.display === 'flex' && galleryContainer.classList.contains('slider-mode')) { 
                 if (e.key === 'ArrowLeft') {
                     prevBtn.click();
                 } else if (e.key === 'ArrowRight') {
@@ -343,6 +343,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-
-    
 });

@@ -182,7 +182,7 @@ ul {
 }
 
 .btn-secondary {
-    padding: 12px 30px;
+    padding: 12px 30px; 
     border: 2px solid var(--accent);
     color: var(--accent);
     border-radius: 4px;
@@ -790,57 +790,27 @@ ul {
     position: relative;
 }
 
-/* --- Styles de base (Mode GALERIE PHOTO / DEFILEMENT) --- */
+/* --- Styles de base (Container Général) --- */
 .carousel-container {
     position: relative;
     width: 100%;
-    max-height: 80vh; 
-    overflow-y: auto; /* Permet le défilement vertical pour la galerie photo */
-    overflow-x: hidden;
-    
-    /* Le display flex/column est parfait pour la liste photo */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
     margin-bottom: 10px;
     border-radius: var(--border-radius);
     background-color: #000;
-    
-    /* Réinitialisation pour la vue liste */
-    padding-top: 0; 
 }
 
-/* Style des images en mode liste */
-.carousel-container img {
-    /* Retrait du positionnement absolu pour le mode liste */
-    position: relative; 
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    margin-bottom: 20px;
-    display: block;
-}
-
-/* --- Styles spécifiques (Mode CARROUSEL 3D / SLIDER-MODE) --- */
-
+/* --- Mode 1 : Carrousel 3D / Slider (CLASSIC) --- */
 .carousel-container.slider-mode {
-    /* CORRECTION CRITIQUE : Position relative pour contenir les boutons absolus */
-    position: relative;
-    /* Désactive le mode Flex et active le conteneur de carrousel */
     display: block; 
-    /* Définit l'aspect ratio 16:9 pour le carrousel */
-    padding-top: 56.25%; 
-    overflow: hidden; /* Important pour cacher les images hors-cadre */
-    overflow-y: hidden; /* Désactive le scroll vertical */
-    /* Hauteur minimale pour s'assurer que le conteneur est visible */
+    padding-top: 56.25%; /* Ratio 16:9 */
+    overflow: hidden; 
+    overflow-y: hidden; 
     min-height: 400px;
 }
 
-/* Style spécifique pour la seule image du carrousel 3D */
+/* Style de l'image unique du slider */
 .carousel-container.slider-mode #carousel-image {
-    position: absolute; /* Positionnement absolu pour le carrousel */
+    position: absolute; 
     top: 0;
     left: 0;
     width: 100%;
@@ -851,10 +821,10 @@ ul {
     display: block !important;
 }
 
-/* --- CORRECTION POSITIONNEMENT BOUTONS --- */
-/* Les boutons sont maintenant des enfants directs de .gallery-content */
+/* --- CORRECTION POSITIONNEMENT BOUTONS NAV --- */
+/* Les boutons sont maintenant des enfants directs de .gallery-content (hors du container) */
 .nav-btn {
-    display: none; /* Caché par défaut, le JS le passera en block */
+    display: none; /* Caché par défaut, le JS le passera en block uniquement pour le slider */
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -887,4 +857,50 @@ ul {
     color: var(--text-muted);
     font-size: 0.9rem;
     margin-top: 10px;
+}
+
+/* ========================================================= */
+/* 09. STYLE SPÉCIFIQUE GALERIE PHOTO (GRID / MASONRY)       */
+/* ========================================================= */
+
+/* Le conteneur en mode Grille Photo */
+.carousel-container.photo-grid-mode {
+    display: grid;
+    /* Crée des colonnes automatiques de minimum 250px de large */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px; /* Espace entre les photos */
+    padding: 10px;
+    background-color: var(--bg-dark); /* Fond sombre au lieu de noir pur */
+    overflow-y: auto; /* Scroll vertical autorisé */
+    max-height: 70vh; /* Limite la hauteur pour ne pas dépasser l'écran */
+}
+
+/* Les items de la grille */
+.photo-item {
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #333;
+    transition: transform 0.3s ease;
+    /* Optionnel : ombre portée */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.photo-item:hover {
+    transform: scale(1.02); /* Petit zoom au survol */
+    border-color: var(--accent);
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Remplit bien la case */
+    display: block;
+    margin-bottom: 0 !important; /* Annule la marge par défaut */
+}
+
+/* Si tu veux que certaines images prennent toute la largeur sur mobile */
+@media (max-width: 600px) {
+    .carousel-container.photo-grid-mode {
+        grid-template-columns: 1fr; /* 1 seule colonne sur mobile */
+    }
 }
