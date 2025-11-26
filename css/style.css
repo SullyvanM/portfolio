@@ -883,6 +883,7 @@ ul {
     transition: transform 0.3s ease;
     /* Optionnel : ombre portée */
     box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    cursor: pointer; /* Indique que c'est cliquable */
 }
 
 .photo-item:hover {
@@ -903,4 +904,33 @@ ul {
     .carousel-container.photo-grid-mode {
         grid-template-columns: 1fr; /* 1 seule colonne sur mobile */
     }
+}
+
+/* ========================================================= */
+/* 10. BOUTON RETOUR GRILLE                                  */
+/* ========================================================= */
+
+.nav-btn-text {
+    position: absolute;
+    top: 15px; 
+    left: 20px; /* À l'opposé de la croix de fermeture */
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: 1px solid var(--accent);
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    z-index: 2100;
+    border-radius: 4px;
+    transition: 0.3s;
+    font-family: var(--font-jp);
+}
+
+.nav-btn-text:hover {
+    background: var(--accent);
+    color: white;
+}
+
+.nav-btn-text i {
+    margin-right: 5px;
 }
