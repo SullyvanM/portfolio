@@ -46,7 +46,7 @@ ul {
 }
 
 /* ========================================================= */
-/* 02. NAVIGATION (NAVBAR) ET EN-TÊTE                        */
+/* 02. NAVIGATION (NAVBAR) ET EN-TÊTE                          */
 /* ========================================================= */
 
 /* Navbar */
@@ -100,7 +100,7 @@ ul {
     position: relative; 
     
     /* Image temple_inari.jpg */
-    background: url('../assets/images/temple_inari.jpg') no-repeat center center/cover;
+    background: url('../assets/images/profil/temple_inari.jpg') no-repeat center center/cover;
 }
 
 /* Voile sombre pour garantir la lisibilité du texte sur l'image */
@@ -148,7 +148,7 @@ ul {
 
 /* CORRECTION DEMANDÉE : Désactive le surlignage dans le Hero pour le nom */
 .hero .red-circle::after {
-    content: none !important; /* Supprime le pseudo-élément (le surlignage) */
+    content: none !important; 
     height: 0 !important;
 }
 
@@ -206,7 +206,7 @@ ul {
 }
 
 /* ========================================================= */
-/* 03. STRUCTURE DES SECTIONS ET DES GRILLES                 */
+/* 03. STRUCTURE DES SECTIONS ET DES GRILLES                   */
 /* ========================================================= */
 
 .section { 
@@ -476,7 +476,7 @@ ul {
 }
 
 /* ========================================================= */
-/* 05. RESPONSIVE DESIGN (MOBILE) ET MODALE                  */
+/* 05. RESPONSIVE DESIGN (MOBILE) ET MODALE                    */
 /* ========================================================= */
 
 /* Version mobile */
@@ -584,6 +584,8 @@ ul {
         opacity: 1; 
     }
 }
+
+/* Bouton de fermeture de la Modale standard (Projet/Hobbies) */
 .close-btn {
     position: absolute; 
     top: 15px; 
@@ -593,10 +595,34 @@ ul {
     font-weight: bold; 
     cursor: pointer; 
     transition: 0.3s;
+    z-index: 2050; 
 }
 .close-btn:hover { 
     color: var(--accent); 
 }
+
+/* Bouton Fermer de la Galerie (Modale) */
+.gallery-close-btn {
+    position: absolute; 
+    top: 15px; 
+    right: 20px; 
+    color: white; 
+    font-size: 30px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: 0.3s;
+    z-index: 2100; 
+    background-color: rgba(0, 0, 0, 0.5); 
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    border-radius: 50%;
+}
+.gallery-close-btn:hover {
+    background-color: var(--accent);
+}
+
 #modal-body ul { 
     list-style: disc outside; 
     margin-left: 20px; 
@@ -684,7 +710,7 @@ ul {
 /* 07. STYLES SPÉCIFIQUES PAGE PROJETS (projects.html)       */
 /* ========================================================= */
 
-/* CORRECTION : Style de l'en-tête de la page Projets (.projects-header-v2) */
+/* Style de l'en-tête de la page Projets (.projects-header-v2) */
 .projects-header-v2 {
     padding-top: 120px; 
     padding-bottom: 50px;
@@ -749,68 +775,111 @@ ul {
         height: 60px; /* Réduit la taille de la barre sur mobile */
     }
 }
-
 /* ========================================================= */
 /* 08. STYLES CARROUSEL/GALERIE D'IMAGES                     */
 /* ========================================================= */
 
 .gallery-content {
-    /* Élargir la modale pour le carrousel */
-    max-width: 900px !important; 
-    padding: 20px !important;
-    background-color: var(--bg-dark); /* Fond plus sombre pour l'image */
-    border: none !important;
+    /* Élargir la modale pour la galerie statique et le carrousel */
+    max-width: 90% !important; 
+    width: 900px; 
+    /* Augmente le padding en haut pour faire de la place pour la croix */
+    padding: 45px 20px 20px 20px !important; 
+    background-color: var(--bg-dark); 
+    border: 1px solid var(--accent); 
+    position: relative;
 }
 
+/* --- Styles de base (Mode GALERIE PHOTO / DEFILEMENT) --- */
 .carousel-container {
     position: relative;
     width: 100%;
-    /* Ratio 16:9 pour les images (ou ajustez si les images 3D ont un autre ratio) */
-    padding-top: 56.25%; 
-    overflow: hidden;
+    max-height: 80vh; 
+    overflow-y: auto; /* Permet le défilement vertical pour la galerie photo */
+    overflow-x: hidden;
+    
+    /* Le display flex/column est parfait pour la liste photo */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     margin-bottom: 10px;
     border-radius: var(--border-radius);
     background-color: #000;
+    
+    /* Réinitialisation pour la vue liste */
+    padding-top: 0; 
 }
 
-.carousel-img {
-    position: absolute;
+/* Style des images en mode liste */
+.carousel-container img {
+    /* Retrait du positionnement absolu pour le mode liste */
+    position: relative; 
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+    display: block;
+}
+
+/* --- Styles spécifiques (Mode CARROUSEL 3D / SLIDER-MODE) --- */
+
+.carousel-container.slider-mode {
+    /* CORRECTION CRITIQUE : Position relative pour contenir les boutons absolus */
+    position: relative;
+    /* Désactive le mode Flex et active le conteneur de carrousel */
+    display: block; 
+    /* Définit l'aspect ratio 16:9 pour le carrousel */
+    padding-top: 56.25%; 
+    overflow: hidden; /* Important pour cacher les images hors-cadre */
+    overflow-y: hidden; /* Désactive le scroll vertical */
+    /* Hauteur minimale pour s'assurer que le conteneur est visible */
+    min-height: 400px;
+}
+
+/* Style spécifique pour la seule image du carrousel 3D */
+.carousel-container.slider-mode #carousel-image {
+    position: absolute; /* Positionnement absolu pour le carrousel */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain; /* L'image est contenue sans être coupée */
+    object-fit: contain; 
     transition: opacity 0.3s;
+    margin-bottom: 0;
+    display: block !important;
 }
 
+/* --- CORRECTION POSITIONNEMENT BOUTONS --- */
+/* Les boutons sont maintenant des enfants directs de .gallery-content */
 .nav-btn {
+    display: none; /* Caché par défaut, le JS le passera en block */
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
     color: white;
     border: none;
-    padding: 15px 10px;
+    padding: 15px 15px; 
     cursor: pointer;
     font-size: 1.5rem;
-    z-index: 10;
+    z-index: 2100; /* Z-index supérieur pour passer au-dessus de tout */
     transition: background 0.3s;
+    border-radius: var(--border-radius);
 }
 
 .nav-btn:hover {
     background: var(--accent);
 }
 
+/* On ajuste la position gauche/droite */
 #prev-btn {
-    left: 0;
-    border-top-right-radius: var(--border-radius);
-    border-bottom-right-radius: var(--border-radius);
+    left: 10px;
 }
 
 #next-btn {
-    right: 0;
-    border-top-left-radius: var(--border-radius);
-    border-bottom-left-radius: var(--border-radius);
+    right: 10px;
 }
 
 .image-counter {

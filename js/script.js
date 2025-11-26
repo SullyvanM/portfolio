@@ -7,9 +7,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelector('.nav-links');
     const navIcon = hamburger ? hamburger.querySelector('i') : null;
 
+    // Navbar
+    const navbar = document.querySelector('.navbar'); 
+
     // Modale de Détails (Projets/Formations/Hobbies)
     const projectModal = document.getElementById('project-modal');
-    const projectCards = document.querySelectorAll('.project-card, .formation-card');
+    // Sélecteur général pour les cartes projet
+    const projectCards = document.querySelectorAll('.project-card, .formation-card'); 
+    
+    // Hobbies (pour la page d'accueil)
     const btnShowHobbies = document.getElementById('btn-show-hobbies');
     const hobbiesDetails = document.getElementById('hobbies-details');
 
@@ -28,8 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
         modalTags = document.getElementById('modal-tags');
     }
 
-    // Sélecteurs de la Modale Galerie (Carrousel)
+    // Sélecteurs de la Modale Galerie
     const galleryModal = document.getElementById('gallery-modal');
+    const galleryContainer = galleryModal ? galleryModal.querySelector('.carousel-container') : null;
+    
     let galleryCloseBtn = null;
     let carouselImage = null;
     let prevBtn = null;
@@ -44,8 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
         imageCounter = document.getElementById('image-counter');
     }
 
-    // Variables pour le Carrousel
+    // Variables pour le Carrousel (utilisé par la Modélisation 3D)
     let currentImages = [];
+    let currentPath = ''; 
     let currentIndex = 0;
 
 
@@ -80,11 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Navbar animation au scroll
-    const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
         if (navbar) {
             if (window.scrollY > 50) {
-                // NOTE: J'ai retiré le changement de couleur de bordure ici, car elle est définie en CSS pour la transparence
                 navbar.style.background = 'rgba(18, 18, 18, 1)';
             } else {
                 navbar.style.background = 'rgba(18, 18, 18, 0.95)';
@@ -95,7 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Menu Hamburger
     if (hamburger && navLinks) {
         hamburger.addEventListener('click', () => {
-            // Pas besoin de vérifier le style.display, le CSS gère l'affichage/masquage
             navLinks.classList.toggle('active');
             if (navIcon) {
                 navIcon.classList.toggle('fa-bars');
@@ -116,25 +122,53 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================================
-    // 03. GESTION POPUP PROJETS / FORMATIONS / HOBBIES
+    // 03. GESTION POPUP PROJETS / FORMATIONS / HOBBIES & GALERIES
     // =========================================================
 
-    if (projectModal) {
+    if (projectModal && galleryModal) {
         
         // 3.1 Gestion de l'ouverture des cartes (Projet/Formation)
         projectCards.forEach(card => {
             card.addEventListener('click', (e) => {
                 
-                // Ignorer le clic si l'utilisateur clique sur un bouton interactif
-                // On inclut ici l'ID du bouton galerie pour éviter le conflit sur le parent
-                if (e.target.closest('.download-btn') || e.target.closest('#open-gallery-scifi')) {
+                // Ignorer le clic si l'utilisateur clique sur un élément interactif à l'intérieur
+                if (e.target.closest('a') || e.target.closest('button')) {
                     return;
                 }
+                
+                // === 1. Vérification du Mode Galerie Statique (Photographie) ===
+                const galleryPath = card.getAttribute('data-gallery-path');
+                const galleryImages = card.getAttribute('data-gallery-images');
 
-                // Extraction des données de la carte
+                if (galleryPath && galleryImages && galleryContainer) {
+                    
+                    // --- DESACTIVE LE MODE SLIDER (Mode Galerie Statique) ---
+                    galleryContainer.classList.remove('slider-mode');
+
+                    galleryContainer.innerHTML = ''; // Vide le conteneur
+                    const imageNames = galleryImages.split(',');
+                    let imageHTML = '';
+
+                    // Crée les balises <img> pour chaque image (Défilement vertical)
+                    imageNames.forEach(imageName => {
+                        imageHTML += `<img src="${galleryPath}${imageName.trim()}" alt="Photographie" style="max-width: 100%; height: auto; margin-bottom: 20px;">`;
+                    });
+
+                    galleryContainer.innerHTML = imageHTML;
+                    
+                    // Masque les contrôles de carrousel (uniquement pour la vue statique)
+                    if (prevBtn) prevBtn.style.display = 'none';
+                    if (nextBtn) nextBtn.style.display = 'none';
+                    if (imageCounter) imageCounter.style.display = 'none';
+                    
+                    galleryModal.style.display = 'flex';
+                    return; // Stoppe ici pour ne pas ouvrir la modale standard
+                }
+
+                // === 2. Cas Modale de Projet Standard ===
                 const title = card.querySelector('h3').innerText;
                 const company = card.querySelector('.company').innerText;
-                const tags = card.querySelector('.tags').innerHTML;
+                const tags = card.querySelector('.tags') ? card.querySelector('.tags').innerHTML : '';
                 
                 const hiddenDetails = card.querySelector('.hidden-details');
                 let descriptionHTML = "";
@@ -145,13 +179,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     descriptionHTML = card.querySelector('p:not(.company)').innerHTML;
                 }
 
-                // Remplissage et affichage de la modale
-                modalTitle.innerText = title;
-                modalCompany.innerText = company;
-                modalBody.innerHTML = descriptionHTML;
-                modalTags.innerHTML = tags;
-
-                projectModal.style.display = 'flex';
+                // Remplissage et affichage de la modale PROJECT-MODAL
+                if (modalTitle && modalCompany && modalBody && modalTags) {
+                    modalTitle.innerText = title;
+                    modalCompany.innerText = company;
+                    modalBody.innerHTML = descriptionHTML;
+                    modalTags.innerHTML = tags;
+                    projectModal.style.display = 'flex';
+                }
             });
         });
 
@@ -159,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (btnShowHobbies && hobbiesDetails) {
             btnShowHobbies.addEventListener('click', () => {
                 modalTitle.innerText = "Mes Hobbies";
-                modalCompany.innerText = ""; // Vider le champ "entreprise"
+                modalCompany.innerText = "";
                 modalBody.innerHTML = hobbiesDetails.innerHTML;
                 modalTags.innerHTML = `
                     <span>Personnel</span>
@@ -177,29 +212,37 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Fermeture en cliquant en dehors de la fenêtre
+        // 3.4 Fermeture des Modales au clic extérieur (AJUSTÉ)
         window.addEventListener('click', (e) => {
             if (e.target === projectModal) {
                 projectModal.style.display = 'none';
+            }
+            // Si c'est la modale galerie, on appelle la fonction de fermeture (qui réinitialise l'état)
+            if (e.target === galleryModal) {
+                 if (galleryCloseBtn) {
+                    galleryCloseBtn.click();
+                } else {
+                    galleryModal.style.display = 'none';
+                }
             }
         });
     }
 
     // =========================================================
-    // 04. GESTION MODALE GALERIE (CARROUSEL)
+    // 04. GESTION MODALE CARROUSEL (pour le bouton Modélisation 3D)
     // =========================================================
-    if (galleryModal) {
+    if (galleryModal && carouselImage && prevBtn && nextBtn && galleryContainer) {
         
         // Fonction pour afficher l'image actuelle du carrousel
-        function updateCarousel() {
+        const updateCarousel = () => {
             if (currentImages.length === 0) return;
             
-            // Correction du chemin d'accès (modelisation)
-            carouselImage.src = 'assets/images/modelisation/' + currentImages[currentIndex]; 
+            // Le chemin est déterminé au moment de l'ouverture pour gérer les différents dossiers
+            carouselImage.src = currentPath + currentImages[currentIndex].trim(); 
             
             // Mise à jour du compteur
             imageCounter.textContent = `${currentIndex + 1} / ${currentImages.length}`;
-        }
+        };
     
         // 4.1 Navigation (Précédent / Suivant)
         prevBtn.addEventListener('click', () => {
@@ -212,65 +255,83 @@ document.addEventListener('DOMContentLoaded', () => {
             updateCarousel();
         });
     
-        // 4.2 Gestion de l'ouverture de la galerie (CORRIGÉ)
+        // 4.2 Gestion de l'ouverture de la galerie (Bouton dans la modale projet)
         document.addEventListener('click', (e) => {
-            // On vérifie si on a cliqué sur le bouton (ou l'icône à l'intérieur)
+            // Vérifie si on a cliqué sur le bouton de galerie pour la 3D
             const openGalleryBtn = e.target.closest('.open-gallery-btn');
             
             if (openGalleryBtn) {
-                // Empêche le clic de remonter (évite de ré-ouvrir la modale projet)
                 e.stopPropagation(); 
                 
-                // Si la modale de détails est ouverte, on la ferme pour laisser place à la galerie
+                // Fermer la modale de détails si elle est ouverte
                 if (projectModal) {
                     projectModal.style.display = 'none'; 
                 }
 
-                // CORRECTION MAJEURE ICI :
-                // On récupère la liste des images directement sur le bouton cliqué
+                // --- AJOUT IMPORTANT : ACTIVE LE MODE SLIDER ---
+                if (galleryContainer) {
+                    galleryContainer.classList.add('slider-mode'); // Ajoute la classe CSS spéciale
+                    galleryContainer.scrollTop = 0; // Remet le scroll en haut
+                }
+
+                // Afficher les contrôles du carrousel pour la 3D
+                // C'est ce qui rend les flèches visibles (combiné avec le CSS .slider-mode .nav-btn)
+                if (prevBtn) prevBtn.style.display = 'block';
+                if (nextBtn) nextBtn.style.display = 'block';
+                if (imageCounter) imageCounter.style.display = 'block';
+
+                // On récupère les données
                 const imagesString = openGalleryBtn.getAttribute('data-images') || '';
                 
-                // On transforme la chaîne de caractères en tableau (séparé par des virgules)
+                // CORRECTION DU CHEMIN : Ajout de 'projets/'
+                currentPath = 'assets/images/projets/modelisation/'; 
+
                 currentImages = imagesString ? imagesString.split(',') : [];
-    
-                // Vérification console pour être sûr
-                console.log("Images chargées :", currentImages);
-    
+            
                 if (currentImages.length > 0) {
-                    // Remettre le carrousel à zéro (première image)
                     currentIndex = 0;
-                    updateCarousel();
                     
-                    // Ouvrir la modale galerie
+                    // On vide le conteneur puis on injecte le carrousel (cache les images statiques)
+                    galleryContainer.innerHTML = '';
+                    galleryContainer.appendChild(carouselImage); 
+                    
+                    // On s'assure que l'image du carrousel est visible
+                    carouselImage.style.display = 'block';
+                    
+                    updateCarousel();
                     galleryModal.style.display = 'flex';
-                } else {
-                    console.error("Erreur : Aucune image trouvée dans l'attribut data-images du bouton.");
                 }
             }
         });
         
-        // 4.3 Gestion de la fermeture de la galerie
-        galleryCloseBtn.addEventListener('click', () => {
-            galleryModal.style.display = 'none';
-        });
-        
-        // Fermeture en cliquant en dehors de la modale galerie
-        window.addEventListener('click', (event) => {
-            if (event.target === galleryModal) {
+        // 4.3 Gestion de la fermeture de la galerie (CORRIGÉ)
+        if (galleryCloseBtn) {
+            galleryCloseBtn.addEventListener('click', () => {
                 galleryModal.style.display = 'none';
-            }
-        });
 
+                // --- CORRECTION : Réinitialisation de l'état du carrousel après fermeture ---
+                if (galleryContainer) {
+                    galleryContainer.classList.remove('slider-mode'); // Désactive le mode carrousel (essentiel)
+                }
+                // Masque les flèches pour les futures ouvertures en mode Galerie Statique (Photographie)
+                if (prevBtn) prevBtn.style.display = 'none';
+                if (nextBtn) nextBtn.style.display = 'none';
+                // -----------------------------------------------------------------------------
+            });
+        }
+    
         // 4.4 Navigation au clavier pour la Galerie
         document.addEventListener('keydown', (e) => {
-            if (galleryModal.style.display === 'flex') {
+            // Vérifie si la modale est visible ET si on est en mode carrousel (plus d'une image)
+            if (galleryModal.style.display === 'flex' && currentImages.length > 1) { 
                 if (e.key === 'ArrowLeft') {
                     prevBtn.click();
                 } else if (e.key === 'ArrowRight') {
                     nextBtn.click();
-                } else if (e.key === 'Escape') {
-                    galleryCloseBtn.click();
-                }
+                } 
+            }
+            if (galleryModal.style.display === 'flex' && e.key === 'Escape') {
+                 galleryCloseBtn.click();
             }
         });
     }
@@ -281,4 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
             projectModalCloseBtn.click();
         }
     });
+
+
+    
 });
