@@ -8,15 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const navIcon = hamburger ? hamburger.querySelector('i') : null;
     const navbar = document.querySelector('.navbar'); 
 
-    // --- MODALE DE DÉTAILS (Projets Classiques & Hobbies) ---
-    // Présente sur index.html ET projects.html
+    // --- MODALE DE DÉTAILS (Projets Classiques & Hobbies & Langues) ---
     const projectModal = document.getElementById('project-modal');
-    // On sélectionne toutes les cartes cliquables
     const projectCards = document.querySelectorAll('.project-card, .formation-card'); 
     
-    // Bouton Hobbies (Page d'accueil)
+    // Boutons Accueil
     const btnShowHobbies = document.getElementById('btn-show-hobbies');
+    const btnShowLanguages = document.getElementById('btn-show-languages'); // Modifié pour sélecteur direct
+    
     const hobbiesDetails = document.getElementById('hobbies-details');
+    const languagesDetails = document.getElementById('languages-details'); // Modifié
 
     // Éléments internes de la Modale Détails
     let projectModalCloseBtn = null;
@@ -31,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- MODALE GALERIE (Photos & 3D) ---
-    // Présente UNIQUEMENT sur projects.html (sera null sur l'accueil)
     const galleryModal = document.getElementById('gallery-modal');
     const galleryContainer = galleryModal ? galleryModal.querySelector('.carousel-container') : null;
     
@@ -53,17 +53,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentImages = [];
     let currentPath = ''; 
     let currentIndex = 0;
-    let isGalleryMode = false; // true = Grille Photo, false = Slider 3D
+    let isGalleryMode = false;
 
     // =========================================================
     // 02. NAVIGATION & SCROLL
     // =========================================================
     
-    // Gestion du scroll fluide
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            // Ferme le menu mobile si ouvert
             if (navLinks && navLinks.classList.contains('active')) {
                 navLinks.classList.remove('active');
                 if (navIcon) { navIcon.classList.remove('fa-times'); navIcon.classList.add('fa-bars'); }
@@ -73,12 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Background Navbar au scroll
     window.addEventListener('scroll', () => {
         if (navbar) navbar.style.background = window.scrollY > 50 ? 'rgba(18, 18, 18, 1)' : 'rgba(18, 18, 18, 0.95)';
     });
 
-    // Menu Hamburger Mobile
     if (hamburger && navLinks) {
         hamburger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
@@ -96,14 +92,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 03. LOGIQUE GALERIE (Fonctions & Events)
     // =========================================================
 
-    // --- Fonctions Utilitaires (définies globalement) ---
-
-    // Affiche une image en grand (Slider)
     const showImageInSlider = (index) => {
         if (!galleryContainer) return;
         currentIndex = index;
         
-        // Setup mode Slider
         galleryContainer.innerHTML = `<img id="carousel-image" src="" alt="Zoom" class="carousel-img">`;
         galleryContainer.classList.remove('photo-grid-mode');
         galleryContainer.classList.add('slider-mode');
@@ -112,29 +104,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const imgElement = document.getElementById('carousel-image');
         if (imgElement) imgElement.src = currentPath + currentImages[currentIndex].trim();
 
-        // Affiche les contrôles
         if (prevBtn) prevBtn.style.display = 'block';
         if (nextBtn) nextBtn.style.display = 'block';
         if (imageCounter) {
             imageCounter.style.display = 'block';
             imageCounter.textContent = `${currentIndex + 1} / ${currentImages.length}`;
         }
-        // Affiche bouton retour si on vient de la grille
         if (isGalleryMode && backToGridBtn) {
             backToGridBtn.style.display = 'block';
         }
     };
 
-    // Construit la Grille de photos
     const buildGrid = () => {
         if (!galleryContainer) return;
         
-        // Setup mode Grille
         galleryContainer.innerHTML = '';
         galleryContainer.classList.remove('slider-mode');
         galleryContainer.classList.add('photo-grid-mode');
 
-        // Masque les contrôles slider
         if (prevBtn) prevBtn.style.display = 'none';
         if (nextBtn) nextBtn.style.display = 'none';
         if (imageCounter) imageCounter.style.display = 'none';
@@ -149,7 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         galleryContainer.innerHTML = imageHTML;
 
-        // Ajout du clic sur chaque photo de la grille
         document.querySelectorAll('.photo-item').forEach(item => {
             item.addEventListener('click', function() {
                 const indexClick = parseInt(this.getAttribute('data-index'));
@@ -158,7 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // --- Événements Galerie (Uniquement si galleryModal existe) ---
     if (galleryModal && galleryContainer) {
         
         const updateSliderImage = () => {
@@ -169,7 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        // Navigation Flèches
         if (prevBtn) prevBtn.addEventListener('click', () => {
             currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
             updateSliderImage();
@@ -180,25 +164,22 @@ document.addEventListener('DOMContentLoaded', () => {
             updateSliderImage();
         });
 
-        // Bouton Retour Grille
         if (backToGridBtn) {
             backToGridBtn.addEventListener('click', () => {
                 buildGrid(); 
             });
         }
         
-        // Clic sur "Voir les captures" (Bouton dans la description 3D)
         document.addEventListener('click', (e) => {
             const openGalleryBtn = e.target.closest('.open-gallery-btn');
             if (openGalleryBtn) {
                 e.stopPropagation();
-                // Ferme la modale projet si ouverte
                 if (projectModal) projectModal.style.display = 'none';
 
                 const imagesString = openGalleryBtn.getAttribute('data-images') || '';
                 currentImages = imagesString ? imagesString.split(',') : [];
                 currentPath = 'assets/images/projets/modelisation/'; 
-                isGalleryMode = false; // Mode Slider direct (pas de grille)
+                isGalleryMode = false;
 
                 if (currentImages.length > 0) {
                     showImageInSlider(0);
@@ -215,42 +196,36 @@ document.addEventListener('DOMContentLoaded', () => {
     if (projectCards.length > 0) {
         projectCards.forEach(card => {
             card.addEventListener('click', (e) => {
-                // Ignore le clic si on clique sur un lien ou bouton à l'intérieur de la carte
                 if (e.target.closest('a') || e.target.closest('button')) return;
 
                 const galleryPathAttr = card.getAttribute('data-gallery-path');
                 const galleryImagesAttr = card.getAttribute('data-gallery-images');
 
-                // --- CAS 1 : C'est une carte GALERIE PHOTO (et la galerie existe) ---
                 if (galleryPathAttr && galleryImagesAttr && galleryModal && galleryContainer) {
                     currentPath = galleryPathAttr;
                     currentImages = galleryImagesAttr.split(',');
-                    isGalleryMode = true; // On active le mode Grille
+                    isGalleryMode = true;
 
                     buildGrid();
                     galleryModal.style.display = 'flex';
-                    return; // On arrête là, pas besoin d'ouvrir la modale projet
+                    return;
                 }
 
-                // --- CAS 2 : C'est une carte PROJET CLASSIQUE ---
                 if (projectModal) {
-                    // Récupération des données
                     const titleElement = card.querySelector('h3');
                     const companyElement = card.querySelector('.company');
                     
-                    if (!titleElement) return; // Sécurité
+                    if (!titleElement) return;
 
                     const title = titleElement.innerText;
                     const company = companyElement ? companyElement.innerText : '';
                     
-                    // Contenu caché ou paragraphe simple
                     const hiddenDetails = card.querySelector('.hidden-details');
                     let descriptionHTML = '';
                     
                     if (hiddenDetails) {
                         descriptionHTML = hiddenDetails.innerHTML;
                     } else {
-                        // Fallback pour les cartes simples (comme sur l'accueil)
                         const pDesc = card.querySelector('p:not(.company)');
                         if(pDesc) descriptionHTML = pDesc.innerHTML;
                     }
@@ -258,13 +233,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     const tagsElement = card.querySelector('.tags');
                     const tags = tagsElement ? tagsElement.innerHTML : '';
 
-                    // Injection des données
                     if (modalTitle) modalTitle.innerText = title;
                     if (modalCompany) modalCompany.innerText = company;
                     if (modalBody) modalBody.innerHTML = descriptionHTML;
                     if (modalTags) modalTags.innerHTML = tags;
                     
-                    // Ouverture
                     projectModal.style.display = 'flex';
                 }
             });
@@ -275,30 +248,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // 05. FERMETURE DES MODALES
     // =========================================================
 
-    // Fonction pour fermer proprement la galerie
     const closeGallery = () => {
         if (!galleryModal) return;
         galleryModal.style.display = 'none';
         if (galleryContainer) {
-            // Nettoyage des classes pour éviter les conflits futurs
             galleryContainer.classList.remove('slider-mode');
             galleryContainer.classList.remove('photo-grid-mode');
         }
     };
 
-    // Bouton Croix - Projet
     if (projectModalCloseBtn) {
         projectModalCloseBtn.addEventListener('click', () => {
             projectModal.style.display = 'none';
         });
     }
 
-    // Bouton Croix - Galerie
     if (galleryCloseBtn) {
         galleryCloseBtn.addEventListener('click', closeGallery);
     }
 
-    // Clic extérieur (Fond noir)
     window.addEventListener('click', (e) => {
         if (projectModal && e.target === projectModal) {
             projectModal.style.display = 'none';
@@ -308,16 +276,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Touche Echap & Flèches Clavier
     document.addEventListener('keydown', (e) => {
-        // Si Galerie ouverte
         if (galleryModal && galleryModal.style.display === 'flex') {
             if (galleryContainer && galleryContainer.classList.contains('slider-mode')) {
                 if (e.key === 'ArrowLeft' && prevBtn) prevBtn.click();
                 if (e.key === 'ArrowRight' && nextBtn) nextBtn.click();
             }
             if (e.key === 'Escape') {
-                // Si on est en zoom photo, Echap revient à la grille
                 if (isGalleryMode && galleryContainer && galleryContainer.classList.contains('slider-mode')) {
                     buildGrid();
                 } else {
@@ -325,24 +290,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         } 
-        // Si Projet ouvert
         else if (projectModal && projectModal.style.display === 'flex') {
             if (e.key === 'Escape') projectModal.style.display = 'none';
         }
     });
 
     // =========================================================
-    // 06. HOBBIES (Page Accueil)
+    // 06. HOBBIES & LANGUES (MODALES)
     // =========================================================
+    
+    // 1. Clic sur "Hobbies"
     if (btnShowHobbies && projectModal) {
         btnShowHobbies.addEventListener('click', () => {
-            if (modalTitle) modalTitle.innerText = "Mes Hobbies";
+            if (modalTitle) modalTitle.innerText = "Mes Hobbies & Passions";
             if (modalCompany) modalCompany.innerText = "";
             if (modalBody) modalBody.innerHTML = hobbiesDetails.innerHTML;
             if (modalTags) modalTags.innerHTML = `
                 <span>Personnel</span>
                 <span>Détente</span>
                 <span>Sport</span>
+            `;
+            projectModal.style.display = 'flex';
+        });
+    }
+
+    // 2. Clic sur "Langues" (Même comportement : Modale)
+    if (btnShowLanguages && projectModal) {
+        btnShowLanguages.addEventListener('click', () => {
+            if (modalTitle) modalTitle.innerText = "Mes Langues";
+            if (modalCompany) modalCompany.innerText = "";
+            if (modalBody) modalBody.innerHTML = languagesDetails.innerHTML;
+            if (modalTags) modalTags.innerHTML = `
+                <span>Communication</span>
+                <span>International</span>
             `;
             projectModal.style.display = 'flex';
         });
