@@ -1,25 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // =========================================================
-    // 01. SÉLECTEURS GLOBAUX
-    // =========================================================
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     const navIcon = hamburger ? hamburger.querySelector('i') : null;
-    const navbar = document.querySelector('.navbar'); 
+    const navbar = document.querySelector('.navbar');
 
-    // --- MODALE DE DÉTAILS (Projets Classiques & Hobbies & Langues) ---
     const projectModal = document.getElementById('project-modal');
-    const projectCards = document.querySelectorAll('.project-card, .formation-card'); 
-    
-    // Boutons Accueil
-    const btnShowHobbies = document.getElementById('btn-show-hobbies');
-    const btnShowLanguages = document.getElementById('btn-show-languages'); // Modifié pour sélecteur direct
-    
-    const hobbiesDetails = document.getElementById('hobbies-details');
-    const languagesDetails = document.getElementById('languages-details'); // Modifié
+    const projectCards = document.querySelectorAll('.project-card, .formation-card');
 
-    // Éléments internes de la Modale Détails
+    const btnShowHobbies = document.getElementById('btn-show-hobbies');
+    const btnShowLanguages = document.getElementById('btn-show-languages');
+
+    const hobbiesDetails = document.getElementById('hobbies-details');
+    const languagesDetails = document.getElementById('languages-details');
+
     let projectModalCloseBtn = null;
     let modalTitle, modalCompany, modalBody, modalTags;
 
@@ -31,34 +25,28 @@ document.addEventListener('DOMContentLoaded', () => {
         modalTags = document.getElementById('modal-tags');
     }
 
-    // --- MODALE GALERIE (Photos & 3D) ---
     const galleryModal = document.getElementById('gallery-modal');
     const galleryContainer = galleryModal ? galleryModal.querySelector('.carousel-container') : null;
-    
+
     let galleryCloseBtn = null;
     let prevBtn = null;
     let nextBtn = null;
     let imageCounter = null;
-    let backToGridBtn = null; 
+    let backToGridBtn = null;
 
     if (galleryModal) {
         galleryCloseBtn = galleryModal.querySelector('.gallery-close-btn');
         prevBtn = document.getElementById('prev-btn');
         nextBtn = document.getElementById('next-btn');
         imageCounter = document.getElementById('image-counter');
-        backToGridBtn = document.getElementById('back-to-grid'); 
+        backToGridBtn = document.getElementById('back-to-grid');
     }
 
-    // Variables d'état pour la Galerie
     let currentImages = [];
-    let currentPath = ''; 
+    let currentPath = '';
     let currentIndex = 0;
     let isGalleryMode = false;
 
-    // =========================================================
-    // 02. NAVIGATION & SCROLL
-    // =========================================================
-    
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -88,14 +76,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // =========================================================
-    // 03. LOGIQUE GALERIE (Fonctions & Events)
-    // =========================================================
-
     const showImageInSlider = (index) => {
         if (!galleryContainer) return;
         currentIndex = index;
-        
+
         galleryContainer.innerHTML = `<img id="carousel-image" src="" alt="Zoom" class="carousel-img">`;
         galleryContainer.classList.remove('photo-grid-mode');
         galleryContainer.classList.add('slider-mode');
@@ -117,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const buildGrid = () => {
         if (!galleryContainer) return;
-        
+
         galleryContainer.innerHTML = '';
         galleryContainer.classList.remove('slider-mode');
         galleryContainer.classList.add('photo-grid-mode');
@@ -145,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     if (galleryModal && galleryContainer) {
-        
+
         const updateSliderImage = () => {
             const imgElement = document.getElementById('carousel-image');
             if (imgElement) {
@@ -166,10 +150,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (backToGridBtn) {
             backToGridBtn.addEventListener('click', () => {
-                buildGrid(); 
+                buildGrid();
             });
         }
-        
+
         document.addEventListener('click', (e) => {
             const openGalleryBtn = e.target.closest('.open-gallery-btn');
             if (openGalleryBtn) {
@@ -178,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const imagesString = openGalleryBtn.getAttribute('data-images') || '';
                 currentImages = imagesString ? imagesString.split(',') : [];
-                currentPath = 'assets/images/projets/modelisation/'; 
+                currentPath = 'assets/images/projets/modelisation/';
                 isGalleryMode = false;
 
                 if (currentImages.length > 0) {
@@ -189,10 +173,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // =========================================================
-    // 04. GESTION DES CLICS SUR LES CARTES (UNIFIÉE)
-    // =========================================================
-    
     if (projectCards.length > 0) {
         projectCards.forEach(card => {
             card.addEventListener('click', (e) => {
@@ -214,15 +194,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (projectModal) {
                     const titleElement = card.querySelector('h3');
                     const companyElement = card.querySelector('.company');
-                    
+
                     if (!titleElement) return;
 
                     const title = titleElement.innerText;
                     const company = companyElement ? companyElement.innerText : '';
-                    
+
                     const hiddenDetails = card.querySelector('.hidden-details');
                     let descriptionHTML = '';
-                    
+
                     if (hiddenDetails) {
                         descriptionHTML = hiddenDetails.innerHTML;
                     } else {
@@ -237,16 +217,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (modalCompany) modalCompany.innerText = company;
                     if (modalBody) modalBody.innerHTML = descriptionHTML;
                     if (modalTags) modalTags.innerHTML = tags;
-                    
+
                     projectModal.style.display = 'flex';
                 }
             });
         });
     }
-
-    // =========================================================
-    // 05. FERMETURE DES MODALES
-    // =========================================================
 
     const closeGallery = () => {
         if (!galleryModal) return;
@@ -289,17 +265,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     closeGallery();
                 }
             }
-        } 
+        }
         else if (projectModal && projectModal.style.display === 'flex') {
             if (e.key === 'Escape') projectModal.style.display = 'none';
         }
     });
 
-    // =========================================================
-    // 06. HOBBIES & LANGUES (MODALES)
-    // =========================================================
-    
-    // 1. Clic sur "Hobbies"
     if (btnShowHobbies && projectModal) {
         btnShowHobbies.addEventListener('click', () => {
             if (modalTitle) modalTitle.innerText = "Mes Hobbies & Passions";
@@ -314,7 +285,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. Clic sur "Langues" (Même comportement : Modale)
     if (btnShowLanguages && projectModal) {
         btnShowLanguages.addEventListener('click', () => {
             if (modalTitle) modalTitle.innerText = "Mes Langues";

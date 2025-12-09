@@ -1,55 +1,41 @@
-/* ========================================================= */
-/* 01. TYPO ET VARIABLES CSS                                 */
-/* ========================================================= */
 :root {
-    /* Couleurs */
     --bg-dark: #121212;
     --bg-card: #1e1e1e;
     --text-main: #f0f0f0;
     --text-muted: #b0b0b0;
-    --accent: #ff2e63; /* Couleur principale (Rouge/Rose) */
+    --accent: #ff2e63;
     --border-color: #333;
 
-    /* Typo et Taille */
     --font-jp: 'Noto Sans JP', sans-serif;
     --border-radius: 8px;
 }
 
-/* Réinitialisation de base */
-* { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-html { 
-    scroll-behavior: smooth; 
+html {
+    scroll-behavior: smooth;
 }
 
-/* Style du corps de page */
 body {
     font-family: var(--font-jp);
     background-color: var(--bg-dark);
     color: var(--text-main);
     line-height: 1.6;
-    /* CORRECTION DU BUG POINT NOIR/DÉBORDEMENT */
-    overflow-x: hidden; 
+    overflow-x: hidden;
 }
 
-/* Styles des liens et listes */
-a { 
-    text-decoration: none; 
-    color: inherit; 
-    transition: 0.3s; 
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s;
 }
-ul { 
-    list-style: none; 
+ul {
+    list-style: none;
 }
 
-/* ========================================================= */
-/* 02. NAVIGATION (NAVBAR) ET EN-TÊTE                          */
-/* ========================================================= */
-
-/* Navbar */
 .navbar {
     position: fixed;
     top: 0;
@@ -64,32 +50,30 @@ ul {
     border-bottom: 1px solid var(--border-color);
 }
 
-.logo { 
-    font-weight: 700; 
-    font-size: 1.2rem; 
-    letter-spacing: 1px; 
+.logo {
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
 }
-.logo .kanji { 
-    color: var(--accent); 
-    margin-left: 5px; 
-}
-
-.nav-links { 
-    display: flex; 
-    gap: 30px; 
-}
-.nav-links a:hover { 
-    color: var(--accent); 
+.logo .kanji {
+    color: var(--accent);
+    margin-left: 5px;
 }
 
-/* Le hamburger est masqué par défaut en desktop */
-.hamburger { 
-    display: none; 
-    cursor: pointer; 
-    font-size: 1.5rem; 
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+.nav-links a:hover {
+    color: var(--accent);
 }
 
-/* Hero Section */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
 .hero {
     min-height: 100vh;
     display: flex;
@@ -97,13 +81,10 @@ ul {
     justify-content: center;
     text-align: center;
     padding: 0 20px;
-    position: relative; 
-    
-    /* Image temple_inari.jpg */
+    position: relative;
     background: url('../assets/images/profil/temple_inari.jpg') no-repeat center center/cover;
 }
 
-/* Voile sombre pour garantir la lisibilité du texte sur l'image */
 .hero::after {
     content: '';
     position: absolute;
@@ -111,204 +92,188 @@ ul {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Opacité ajustée pour une bonne lisibilité (0.85 est souvent idéal) */
-    background: rgba(18, 18, 18, 0.85); 
-    z-index: 1; 
+    background: rgba(18, 18, 18, 0.85);
+    z-index: 1;
 }
-/* Le contenu du hero doit être au-dessus du voile */
+
 .hero > * {
-    z-index: 10; 
+    z-index: 10;
     position: relative;
 }
 
-
-.hero h1 { 
-    font-size: 3.5rem; 
-    margin: 10px 0; 
-    font-weight: 700; 
+.hero h1 {
+    font-size: 3.5rem;
+    margin: 10px 0;
+    font-weight: 700;
 }
 
-/* Effet de surlignage */
-.red-circle { 
-    color: var(--accent); 
-    position: relative; 
-    display: inline-block; 
+.red-circle {
+    color: var(--accent);
+    position: relative;
+    display: inline-block;
 }
 .red-circle::after {
-    content: ''; 
-    position: absolute; 
-    bottom: 5px; 
-    left: 0; 
-    width: 100%; 
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
     height: 10px;
-    background: var(--accent); 
-    opacity: 0.3; 
+    background: var(--accent);
+    opacity: 0.3;
     z-index: -1;
 }
 
-/* CORRECTION DEMANDÉE : Désactive le surlignage dans le Hero pour le nom */
 .hero .red-circle::after {
-    content: none !important; 
+    content: none !important;
     height: 0 !important;
 }
 
-.hero .subtitle { 
-    letter-spacing: 3px; 
-    text-transform: uppercase; 
-    color: var(--accent); 
-    font-weight: bold; 
+.hero .subtitle {
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: bold;
 }
-.hero .description { 
-    max-width: 600px; 
-    margin: 0 auto 30px; 
-    color: var(--text-muted); 
+.hero .description {
+    max-width: 600px;
+    margin: 0 auto 30px;
+    color: var(--text-muted);
 }
-.hero-btns { 
-    display: flex; 
-    gap: 20px; 
-    justify-content: center; 
+.hero-btns {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
 }
 
-/* Boutons */
 .btn-main {
-    padding: 12px 30px; 
-    border: 2px solid var(--accent); 
+    padding: 12px 30px;
+    border: 2px solid var(--accent);
     background: var(--accent);
-    color: white; 
-    border-radius: 4px; 
-    font-weight: bold; 
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
     cursor: pointer;
     transition: 0.3s all ease;
 }
 
 .btn-secondary {
-    padding: 12px 30px; 
+    padding: 12px 30px;
     border: 2px solid var(--accent);
     color: var(--accent);
     border-radius: 4px;
     font-weight: bold;
-    background-color: transparent; 
+    background-color: transparent;
     cursor: pointer;
     font-family: inherit;
-    font-size: 1rem; 
+    font-size: 1rem;
     transition: 0.3s all ease;
 }
 
-.btn-main:hover { 
-    background: transparent; 
-    color: var(--accent); 
+.btn-main:hover {
+    background: transparent;
+    color: var(--accent);
 }
 
 .btn-secondary:hover {
-    /* Au survol : Remplissage rouge + text blanc */
     background: var(--accent);
     color: white;
 }
 
-/* ========================================================= */
-/* 03. STRUCTURE DES SECTIONS ET DES GRILLES                   */
-/* ========================================================= */
-
-.section { 
-    padding: 80px 50px; 
-    max-width: 1200px; 
-    margin: 0 auto; 
+.section {
+    padding: 80px 50px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
-.bg-alt { 
-    background-color: #181818; 
-    width: 100%; 
-    max-width: 100%; 
+.bg-alt {
+    background-color: #181818;
+    width: 100%;
+    max-width: 100%;
 }
 
-/* Titre des sections */
 .section-title {
-    font-size: 2rem; 
-    margin-bottom: 50px; 
+    font-size: 2rem;
+    margin-bottom: 50px;
     border-left: 5px solid var(--accent);
-    padding-left: 15px; 
-    display: flex; 
+    padding-left: 15px;
+    display: flex;
     align-items: baseline;
 }
-.jp-title { 
-    font-size: 1.5rem; 
-    margin-left: 10px; 
-    color: #444; 
-    font-weight: 300; 
+.jp-title {
+    font-size: 1.5rem;
+    margin-left: 10px;
+    color: #444;
+    font-weight: 300;
 }
 
-/* A Propos */
-.about-container { 
-    display: flex; 
-    gap: 50px; 
-    align-items: center; 
-    flex-wrap: wrap; 
+.about-container {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    flex-wrap: wrap;
 }
 .about-img img {
-    width: 300px; 
-    height: 300px; 
-    object-fit: cover; 
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
     border-radius: 10px;
-    border: 3px solid var(--accent); 
+    border: 3px solid var(--accent);
     box-shadow: 10px 10px 0px #333;
 }
-.about-text { 
-    flex: 1; 
+.about-text {
+    flex: 1;
 }
-.about-text h3 { 
-    margin-bottom: 20px; 
-    font-size: 1.5rem; 
+.about-text h3 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
 }
-.soft-skills { 
-    margin-top: 20px; 
-    display: flex; 
-    gap: 20px; 
-    color: var(--accent); 
-    font-weight: bold; 
+.soft-skills {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+    color: var(--accent);
+    font-weight: bold;
 }
 
-/* Grilles pour Compétences, Projets, Formations */
 .skills-grid, .projects-grid, .formation-grid{
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
 }
 
-/* Cartes Compétences */
 .skill-card {
-    background: var(--bg-card); 
-    padding: 30px; 
-    border-radius: var(--border-radius); 
+    background: var(--bg-card);
+    padding: 30px;
+    border-radius: var(--border-radius);
     text-align: center;
-    border: 1px solid #333; 
+    border: 1px solid #333;
     transition: transform 0.3s;
 }
-.skill-card:hover { 
-    transform: translateY(-5px); 
-    border-color: var(--accent); 
+.skill-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
 }
-.skill-card i { 
-    font-size: 3rem; 
-    color: var(--accent); 
-    margin-bottom: 20px; 
+.skill-card i {
+    font-size: 3rem;
+    color: var(--accent);
+    margin-bottom: 20px;
 }
 
-/* Cartes Formations / Projets */
 .project-card, .formation-card {
-    background: var(--bg-card); 
-    border-radius: var(--border-radius); 
+    background: var(--bg-card);
+    border-radius: var(--border-radius);
     overflow: hidden;
-    border: 1px solid #333; 
-    transition: 0.3s; 
-    display: flex; 
+    border: 1px solid #333;
+    transition: 0.3s;
+    display: flex;
     flex-direction: column;
     cursor: pointer;
 }
-.project-card:hover, .formation-card:hover { 
-    transform: scale(1.02); 
-    border-color: #555; 
+.project-card:hover, .formation-card:hover {
+    transform: scale(1.02);
+    border-color: #555;
 }
 
-/* Images et Contenu des cartes */
 .card-image {
     height: 200px;
     width: 100%;
@@ -320,57 +285,52 @@ ul {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top; 
+    object-position: top;
     transition: transform 0.5s ease;
 }
-.project-card:hover .project-img { 
-    transform: scale(1.05); 
+.project-card:hover .project-img {
+    transform: scale(1.05);
 }
 
-/* Placeholder (Si besoin) */
 .placeholder-img {
-    width: 100%; 
-    height: 100%; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: white;
 }
 .color-1 { background: #2c3e50; }
 .color-2 { background: #4a148c; }
 .color-3 { background: #1e3799; }
 
-.card-content { 
-    padding: 20px; 
-    flex-grow: 1; 
-    display: flex; 
-    flex-direction: column; 
+.card-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
-.card-content h3 { 
-    margin-bottom: 5px; 
+.card-content h3 {
+    margin-bottom: 5px;
 }
-.company { 
-    color: var(--accent); 
-    font-style: italic; 
-    font-size: 0.9rem; 
-    margin-bottom: 15px; 
+.company {
+    color: var(--accent);
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
 }
-.tags { 
-    margin-top: auto; 
-    padding-top: 15px; 
+.tags {
+    margin-top: auto;
+    padding-top: 15px;
 }
 .tags span {
-    font-size: 0.8rem; 
-    background: #333; 
+    font-size: 0.8rem;
+    background: #333;
     padding: 4px 8px;
-    border-radius: 4px; 
-    margin-right: 5px; 
+    border-radius: 4px;
+    margin-right: 5px;
     color: var(--text-muted);
 }
-
-/* ========================================================= */
-/* 04. CONTACT ET FORMULAIRE                                 */
-/* ========================================================= */
 
 .contact-container {
     display: flex;
@@ -382,7 +342,6 @@ ul {
     padding: 0 20px;
 }
 
-/* Infos à gauche */
 .contact-info-column {
     flex: 1;
     padding-top: 10px;
@@ -403,7 +362,6 @@ ul {
     text-align: center;
 }
 
-/* Sociaux (LinkedIn, etc.) */
 .socials {
     margin-top: 1.5rem;
     font-size: 1.5rem;
@@ -412,89 +370,80 @@ ul {
     color: var(--text-muted);
     text-decoration: none;
     transition: color 0.3s;
-    font-size: 1.1rem; /* Taille du texte */
-    display: flex; 
+    font-size: 1.1rem;
+    display: flex;
     align-items: center;
     margin-bottom: 15px;
 }
 .socials a i {
     margin-right: 15px;
-    color: var(--accent); /* Icône en couleur accent */
-    font-size: 1.5rem; /* Taille de l'icône */
+    color: var(--accent);
+    font-size: 1.5rem;
 }
 .socials a:hover {
-    color: var(--accent); /* Le texte devient rouge au survol */
+    color: var(--accent);
 }
 
-/* Formulaire à droite */
 .contact-form {
     background: white;
     padding: 1.5rem;
     border-radius: var(--border-radius);
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     width: 100%;
-    max-width: 400px; 
+    max-width: 400px;
 }
 
-.form-group { 
-    margin-bottom: 0.8rem; 
+.form-group {
+    margin-bottom: 0.8rem;
 }
 .form-group label {
-    display: block; 
+    display: block;
     margin-bottom: 0.3rem;
-    font-weight: 500; 
+    font-weight: 500;
     color: #333;
 }
 .contact-form input, .contact-form textarea {
-    width: 100%; 
+    width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
-    border-radius: 4px; 
-    font-family: inherit; 
+    border-radius: 4px;
+    font-family: inherit;
     font-size: 1rem;
 }
 .contact-form input:focus, .contact-form textarea:focus {
-    outline: none; 
+    outline: none;
     border-color: var(--accent);
 }
-.full-width { 
-    width: 100%; 
-    margin-top: 10px; 
+.full-width {
+    width: 100%;
+    margin-top: 10px;
     padding: 10px;
 }
 
-/* Footer */
 .main-footer {
-    text-align: center; 
+    text-align: center;
     padding: 30px 20px;
-    background: #0f0f0f; 
+    background: #0f0f0f;
     border-top: 1px solid #333;
 }
-.copyright { 
-    font-size: 0.8rem; 
-    color: #555; 
+.copyright {
+    font-size: 0.8rem;
+    color: #555;
 }
 
-/* ========================================================= */
-/* 05. RESPONSIVE DESIGN (MOBILE) ET MODALE                    */
-/* ========================================================= */
-
-/* Version mobile */
 @media (max-width: 768px) {
-    .navbar { 
-        padding: 15px 20px; 
+    .navbar {
+        padding: 15px 20px;
     }
-    
-    /* Gestion menu hamburger */
-    .nav-links { 
-        display: none; /* Masque les liens par défaut */
-    } 
-    
+
+    .nav-links {
+        display: none;
+    }
+
     .hamburger {
-        display: block; /* Affiche le hamburger sur mobile */
+        display: block;
     }
-    
-    /* Le JS ajoute la classe .active pour forcer l'affichage du menu */
+
     .nav-links.active {
         display: flex;
         flex-direction: column;
@@ -512,107 +461,102 @@ ul {
         text-align: center;
         margin: 10px 0;
     }
-    /* ------------------------------------- */
 
-    .hero h1 { 
-        font-size: 2.5rem; 
+    .hero h1 {
+        font-size: 2.5rem;
     }
-    .about-container { 
-        flex-direction: column; 
-        text-align: center; 
+    .about-container {
+        flex-direction: column;
+        text-align: center;
     }
-    .soft-skills { 
-        justify-content: center; 
+    .soft-skills {
+        justify-content: center;
     }
-    .section { 
-        padding: 50px 20px; 
+    .section {
+        padding: 50px 20px;
     }
-    
-    /* Contact Mobile */
+
     .contact-container {
-        flex-direction: column; 
+        flex-direction: column;
         gap: 2rem;
     }
-    
-    .contact-info-column { 
+
+    .contact-info-column {
         width: 100%;
-        text-align: center; 
+        text-align: center;
     }
-    
-    .contact-details p { 
-        justify-content: center; 
+
+    .contact-details p {
+        justify-content: center;
     }
-    
+
     .contact-form {
         max-width: 100%;
     }
 }
 
-/* Popup/Modale */
 .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 2000; 
-    left: 0; 
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
     top: 0;
-    width: 100%; 
-    height: 100%; 
+    width: 100%;
+    height: 100%;
     background-color: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px); 
-    justify-content: center; 
-    align-items: center; 
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
     padding: 20px;
 }
 .modal-content {
-    background-color: var(--bg-card); 
+    background-color: var(--bg-card);
     border: 1px solid var(--accent);
-    padding: 40px; 
-    border-radius: 8px; 
-    width: 100%; 
+    padding: 40px;
+    border-radius: 8px;
+    width: 100%;
     max-width: 600px;
-    position: relative; 
+    position: relative;
     box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     animation: slideIn 0.3s ease-out;
 }
 @keyframes slideIn {
-    from { 
-        transform: translateY(50px); 
-        opacity: 0; 
+    from {
+        transform: translateY(50px);
+        opacity: 0;
     }
-    to { 
-        transform: translateY(0); 
-        opacity: 1; 
+    to {
+        transform: translateY(0);
+        opacity: 1;
     }
 }
 
-/* Bouton de fermeture de la Modale standard (Projet/Hobbies) */
 .close-btn {
-    position: absolute; 
-    top: 15px; 
-    right: 20px; 
+    position: absolute;
+    top: 15px;
+    right: 20px;
     color: var(--text-muted);
-    font-size: 30px; 
-    font-weight: bold; 
-    cursor: pointer; 
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
     transition: 0.3s;
-    z-index: 2050; 
+    z-index: 2050;
 }
-.close-btn:hover { 
-    color: var(--accent); 
+.close-btn:hover {
+    color: var(--accent);
 }
 
-/* Bouton Fermer de la Galerie (Modale) */
 .gallery-close-btn {
-    position: absolute; 
-    top: 15px; 
-    right: 20px; 
-    color: white; 
-    font-size: 30px; 
-    font-weight: bold; 
-    cursor: pointer; 
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
     transition: 0.3s;
-    z-index: 2100; 
-    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 2100;
+    background-color: rgba(0, 0, 0, 0.5);
     width: 35px;
     height: 35px;
     text-align: center;
@@ -623,40 +567,36 @@ ul {
     background-color: var(--accent);
 }
 
-#modal-body ul { 
-    list-style: disc outside; 
-    margin-left: 20px; 
-    margin-top: 10px; 
-    color: var(--text-muted); 
+#modal-body ul {
+    list-style: disc outside;
+    margin-left: 20px;
+    margin-top: 10px;
+    color: var(--text-muted);
 }
-#modal-body p { 
-    margin-bottom: 10px; 
+#modal-body p {
+    margin-bottom: 10px;
 }
-
-/* ========================================================= */
-/* 06. STYLES SPÉCIFIQUES POUR LE CONTENU DE LA MODALE HOBBIES */
-/* ========================================================= */
 
 .hobbies-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px; 
+    gap: 15px;
     margin-top: 20px;
     padding-top: 15px;
-    border-top: 1px dashed #333; 
+    border-top: 1px dashed #333;
 }
 
 .hobby-item {
-    background: var(--bg-dark); 
+    background: var(--bg-dark);
     padding: 15px;
     border-radius: var(--border-radius);
-    border: 1px solid #333; 
+    border: 1px solid #333;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
     transition: border-color 0.3s;
 }
 
 .hobby-item:hover {
-    border-color: var(--accent); 
+    border-color: var(--accent);
 }
 
 .hobby-item h4 {
@@ -677,12 +617,11 @@ ul {
 .hobby-item i {
     font-size: 1.2rem;
     margin-right: 8px;
-    color: var(--accent); 
+    color: var(--accent);
 }
 
-/* Les tags affichés sous les cartes de hobbies */
 .hobbies-tags {
-    margin-top: 30px; 
+    margin-top: 30px;
     text-align: center;
     border-top: 1px dashed #333;
     padding-top: 20px;
@@ -691,34 +630,28 @@ ul {
 .hobbies-tags span {
     display: inline-block;
     font-size: 0.9rem;
-    background: #333; 
-    color: var(--text-muted); 
+    background: #333;
+    color: var(--text-muted);
     padding: 6px 12px;
-    border-radius: 20px; 
+    border-radius: 20px;
     margin: 5px;
     border: 1px solid #555;
 }
 
-/* Ajustement pour les très petits écrans à l'intérieur de la modale */
 @media (max-width: 550px) {
     .hobbies-grid {
         grid-template-columns: 1fr;
     }
 }
 
-/* ========================================================= */
-/* 07. STYLES SPÉCIFIQUES PAGE PROJETS (projects.html)       */
-/* ========================================================= */
-
-/* Style de l'en-tête de la page Projets (.projects-header-v2) */
 .projects-header-v2 {
-    padding-top: 120px; 
+    padding-top: 120px;
     padding-bottom: 50px;
     background-color: var(--bg-dark);
     border-bottom: 1px solid var(--border-color);
     max-width: 1200px;
     margin: 0 auto;
-    padding-left: 50px; 
+    padding-left: 50px;
     padding-right: 50px;
 }
 
@@ -730,9 +663,9 @@ ul {
 
 .projects-header-v2 .accent-bar {
     width: 5px;
-    height: 90px; /* Hauteur de la barre rouge */
+    height: 90px;
     background: var(--accent);
-    flex-shrink: 0; 
+    flex-shrink: 0;
 }
 
 .projects-header-v2 h1 {
@@ -749,15 +682,13 @@ ul {
     margin: 0;
 }
 
-/* Style Bouton de Téléchargement dans la Carte Projet (Modale) */
 .download-btn {
-    text-align: center; 
-    display: block; 
-    margin-top: 20px; 
-    margin-bottom: 5px; 
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 5px;
 }
 
-/* RESPONSIVE MOBILE pour le Header Projets */
 @media (max-width: 768px) {
     .projects-header-v2 {
         padding-top: 80px;
@@ -772,25 +703,19 @@ ul {
         font-size: 0.9rem;
     }
     .projects-header-v2 .accent-bar {
-        height: 60px; /* Réduit la taille de la barre sur mobile */
+        height: 60px;
     }
 }
-/* ========================================================= */
-/* 08. STYLES CARROUSEL/GALERIE D'IMAGES                     */
-/* ========================================================= */
 
 .gallery-content {
-    /* Élargir la modale pour la galerie statique et le carrousel */
-    max-width: 90% !important; 
-    width: 900px; 
-    /* Augmente le padding en haut pour faire de la place pour la croix */
-    padding: 45px 20px 20px 20px !important; 
-    background-color: var(--bg-dark); 
-    border: 1px solid var(--accent); 
+    max-width: 90% !important;
+    width: 900px;
+    padding: 45px 20px 20px 20px !important;
+    background-color: var(--bg-dark);
+    border: 1px solid var(--accent);
     position: relative;
 }
 
-/* --- Styles de base (Container Général) --- */
 .carousel-container {
     position: relative;
     width: 100%;
@@ -799,42 +724,38 @@ ul {
     background-color: #000;
 }
 
-/* --- Mode 1 : Carrousel 3D / Slider (CLASSIC) --- */
 .carousel-container.slider-mode {
-    display: block; 
-    padding-top: 56.25%; /* Ratio 16:9 */
-    overflow: hidden; 
-    overflow-y: hidden; 
+    display: block;
+    padding-top: 56.25%;
+    overflow: hidden;
+    overflow-y: hidden;
     min-height: 400px;
 }
 
-/* Style de l'image unique du slider */
 .carousel-container.slider-mode #carousel-image {
-    position: absolute; 
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain; 
+    object-fit: contain;
     transition: opacity 0.3s;
     margin-bottom: 0;
     display: block !important;
 }
 
-/* --- CORRECTION POSITIONNEMENT BOUTONS NAV --- */
-/* Les boutons sont maintenant des enfants directs de .gallery-content (hors du container) */
 .nav-btn {
-    display: none; /* Caché par défaut, le JS le passera en block uniquement pour le slider */
+    display: none;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     background: rgba(0, 0, 0, 0.7);
     color: white;
     border: none;
-    padding: 15px 15px; 
+    padding: 15px 15px;
     cursor: pointer;
     font-size: 1.5rem;
-    z-index: 2100; /* Z-index supérieur pour passer au-dessus de tout */
+    z-index: 2100;
     transition: background 0.3s;
     border-radius: var(--border-radius);
 }
@@ -843,7 +764,6 @@ ul {
     background: var(--accent);
 }
 
-/* On ajuste la position gauche/droite */
 #prev-btn {
     left: 10px;
 }
@@ -859,61 +779,48 @@ ul {
     margin-top: 10px;
 }
 
-/* ========================================================= */
-/* 09. STYLE SPÉCIFIQUE GALERIE PHOTO (GRID / MASONRY)       */
-/* ========================================================= */
-
-/* Le conteneur en mode Grille Photo */
 .carousel-container.photo-grid-mode {
     display: grid;
-    /* Crée des colonnes automatiques de minimum 250px de large */
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 15px; /* Espace entre les photos */
+    gap: 15px;
     padding: 10px;
-    background-color: var(--bg-dark); /* Fond sombre au lieu de noir pur */
-    overflow-y: auto; /* Scroll vertical autorisé */
-    max-height: 70vh; /* Limite la hauteur pour ne pas dépasser l'écran */
+    background-color: var(--bg-dark);
+    overflow-y: auto;
+    max-height: 70vh;
 }
 
-/* Les items de la grille */
 .photo-item {
     border-radius: 4px;
     overflow: hidden;
     border: 1px solid #333;
     transition: transform 0.3s ease;
-    /* Optionnel : ombre portée */
     box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-    cursor: pointer; /* Indique que c'est cliquable */
+    cursor: pointer;
 }
 
 .photo-item:hover {
-    transform: scale(1.02); /* Petit zoom au survol */
+    transform: scale(1.02);
     border-color: var(--accent);
 }
 
 .photo-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Remplit bien la case */
+    object-fit: cover;
     display: block;
-    margin-bottom: 0 !important; /* Annule la marge par défaut */
+    margin-bottom: 0 !important;
 }
 
-/* Si tu veux que certaines images prennent toute la largeur sur mobile */
 @media (max-width: 600px) {
     .carousel-container.photo-grid-mode {
-        grid-template-columns: 1fr; /* 1 seule colonne sur mobile */
+        grid-template-columns: 1fr;
     }
 }
 
-/* ========================================================= */
-/* 10. BOUTON RETOUR GRILLE                                  */
-/* ========================================================= */
-
 .nav-btn-text {
     position: absolute;
-    top: 15px; 
-    left: 20px; /* À l'opposé de la croix de fermeture */
+    top: 15px;
+    left: 20px;
     background: rgba(0, 0, 0, 0.6);
     color: white;
     border: 1px solid var(--accent);
